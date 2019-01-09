@@ -1,4 +1,4 @@
-package com.udacity.nanodegree.podcaps;
+package com.nanodegree.udacity.podcaps;
 
 import org.junit.Test;
 

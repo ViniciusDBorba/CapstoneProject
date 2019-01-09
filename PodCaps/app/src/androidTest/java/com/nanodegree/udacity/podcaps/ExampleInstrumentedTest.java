@@ -1,4 +1,4 @@
-package com.udacity.nanodegree.podcaps;
+package com.nanodegree.udacity.podcaps;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;
@@ -21,6 +21,6 @@ public class ExampleInstrumentedTest {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getTargetContext();
 
-        assertEquals("com.udacity.nanodegree.podcaps", appContext.getPackageName());
+        assertEquals("com.nanodegree.udacity.podcaps", appContext.getPackageName());
     }
 }

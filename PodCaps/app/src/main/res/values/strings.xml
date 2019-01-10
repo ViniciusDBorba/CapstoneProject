@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">PodCaps</string>
+
+
+    <string name="app_title_content_description">Titulo do aplicativo (PodCaps)</string>
+    <string name="app_icon_content_description">Ícone do aplicativo (Headset).</string>
+    <string name="email_login_edit_text_content_description">Digite seu email</string>
 </resources>

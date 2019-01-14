@@ -1,8 +1,15 @@
 <resources>
     <string name="app_name">PodCaps</string>
+    <string name="enter">Entrar</string>
 
 
     <string name="app_title_content_description">Titulo do aplicativo (PodCaps)</string>
     <string name="app_icon_content_description">Ícone do aplicativo (Headset).</string>
     <string name="email_login_edit_text_content_description">Digite seu email</string>
+    <string name="login_button_content_description">Botão de entrar. (Clique para logar no aplicativo)</string>
+    <string name="navigation_podcast_list_content_description">Opção da lista de podcasts do menu (Clique para acessar a lista de podcasts)</string>
+    <string name="title_activity_main">MainActivity</string>
+    <string name="title_home">Home</string>
+    <string name="title_podcast_list">Podcasts</string>
+    <string name="title_notifications">Notifications</string>
 </resources>

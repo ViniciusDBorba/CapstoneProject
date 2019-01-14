@@ -7,6 +7,7 @@
 
     <color name="default_background">#FF212121</color>
     <color name="default_app_icon_color">#515151</color>
+    <color name="default_app_grey">#FFCED7DB</color>
 
 
 </resources>

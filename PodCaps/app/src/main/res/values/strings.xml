@@ -10,6 +10,13 @@
     <string name="navigation_podcast_list_content_description">Opção da lista de podcasts do menu (Clique para acessar a lista de podcasts)</string>
     <string name="navigation_favorites_list_content_description">Opção de lista de podcasts favoritos do menu (Clique para acessar a lista de podcasts favoritos)</string>
     <string name="navigation_channel_content_description">Opção de canal do menu (Clique para acessar o seu canal de podcasts)</string>
+    <string name="navigation_menu_content_description">Menu (Opções de acesso as telas)</string>
+    <string name="podcast_title_content_description">Nome do podcast</string>
+    <string name="podcast_control_back_content_description">Botão de voltar podcast</string>
+    <string name="podcast_control_next_content_description">Botão de seguir para o próximo podcast</string>
+    <string name="podcast_control_pause_content_description">Botão de pausar podcast</string>
+    <string name="podcast_control_progress_content_description">Barra que demonstra o progresso do podcast</string>
+    <string name="podcast_image_content_description">Capa do podcast</string>
     <string name="title_activity_main">MainActivity</string>
     <string name="title_channel">Canal</string>
     <string name="title_podcast_list">Podcasts</string>

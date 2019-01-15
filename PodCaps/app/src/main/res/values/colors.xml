@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#008577</color>
+    <color name="colorPrimary">#FF445963</color>
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#D81B60</color>
 
@@ -8,6 +8,10 @@
     <color name="default_background">#FF212121</color>
     <color name="default_app_icon_color">#515151</color>
     <color name="default_app_grey">#FFCED7DB</color>
+    <color name="app_dark_grey">#758187</color>
+    <color name="app_dark_grey_text">#D6DBDD</color>
+    <color name="app_icon_grey">#7C8B92</color>
+    <color name="app_icon_light_grey">#ACB3B7</color>
 
 
 </resources>

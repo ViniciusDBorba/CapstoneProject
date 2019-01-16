@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">PodCaps</string>
     <string name="enter">Entrar</string>
+    <string name="channel_title">Nome do meu canal de podcasts</string>
 
 
     <string name="app_title_content_description">Titulo do aplicativo (PodCaps)</string>
@@ -17,8 +18,16 @@
     <string name="podcast_control_pause_content_description">Botão de pausar podcast</string>
     <string name="podcast_control_progress_content_description">Barra que demonstra o progresso do podcast</string>
     <string name="podcast_image_content_description">Capa do podcast</string>
+    <string name="channel_image_content_description">Imagem do canal</string>
+    <string name="my_podcast_list_content_description">Lista contendo os seus podcasts</string>
+    <string name="channel_title_content_description">Titulo do canal</string>
+    <string name="channel_description_content_description">Descrição do canal</string>
+    <string name="channel_edit_content_description">Clique para editar o canal</string>
     <string name="title_activity_main">MainActivity</string>
     <string name="title_channel">Canal</string>
     <string name="title_podcast_list">Podcasts</string>
     <string name="title_favorites">Favoritos</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

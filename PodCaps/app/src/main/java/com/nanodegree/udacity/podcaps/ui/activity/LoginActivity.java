@@ -1,8 +1,10 @@
-package com.nanodegree.udacity.podcaps;
+package com.nanodegree.udacity.podcaps.ui.activity;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+
+import com.nanodegree.udacity.podcaps.R;
 
 import butterknife.ButterKnife;
 import butterknife.OnClick;

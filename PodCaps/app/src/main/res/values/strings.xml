@@ -2,6 +2,7 @@
     <string name="app_name">PodCaps</string>
     <string name="enter">Entrar</string>
     <string name="channel_title">Nome do meu canal de podcasts</string>
+    <string name="podcast_title">Nome do podcast</string>
 
 
     <string name="app_title_content_description">Titulo do aplicativo (PodCaps)</string>
@@ -13,6 +14,7 @@
     <string name="navigation_channel_content_description">Opção de canal do menu (Clique para acessar o seu canal de podcasts)</string>
     <string name="navigation_menu_content_description">Menu (Opções de acesso as telas)</string>
     <string name="podcast_title_content_description">Nome do podcast</string>
+    <string name="podcast_description_content_description">Nome do podcast</string>
     <string name="podcast_control_back_content_description">Botão de voltar podcast</string>
     <string name="podcast_control_next_content_description">Botão de seguir para o próximo podcast</string>
     <string name="podcast_control_pause_content_description">Botão de pausar podcast</string>
@@ -23,6 +25,7 @@
     <string name="channel_title_content_description">Titulo do canal</string>
     <string name="channel_description_content_description">Descrição do canal</string>
     <string name="channel_edit_content_description">Clique para editar o canal</string>
+    <string name="favorites_podcast_list_content_description">Lista contendo os seus podcasts favoritos</string>
     <string name="title_activity_main">MainActivity</string>
     <string name="title_channel">Canal</string>
     <string name="title_podcast_list">Podcasts</string>

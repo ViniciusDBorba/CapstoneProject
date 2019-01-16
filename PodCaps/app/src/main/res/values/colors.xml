@@ -9,6 +9,7 @@
     <color name="default_app_icon_color">#515151</color>
     <color name="default_app_grey">#FFCED7DB</color>
     <color name="app_dark_grey">#758187</color>
+    <color name="fount_dark_grey">#949494</color>
     <color name="app_dark_grey_text">#D6DBDD</color>
     <color name="app_icon_grey">#7C8B92</color>
     <color name="app_icon_light_grey">#ACB3B7</color>

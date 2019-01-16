@@ -20,6 +20,9 @@
     <string name="podcast_control_pause_content_description">Botão de pausar podcast</string>
     <string name="podcast_control_progress_content_description">Barra que demonstra o progresso do podcast</string>
     <string name="podcast_image_content_description">Capa do podcast</string>
+    <string name="podcast_star_content_description">Botão de adicionar ou remover podcast a lista de favoritos</string>
+    <string name="podcast_favorites_remove_content_description">Clique para remover da lista de favoritos</string>
+    <string name="podcast_channel_remove_content_description">Clique para excluir este podcast</string>
     <string name="channel_image_content_description">Imagem do canal</string>
     <string name="my_podcast_list_content_description">Lista contendo os seus podcasts</string>
     <string name="channel_title_content_description">Titulo do canal</string>

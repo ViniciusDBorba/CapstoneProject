@@ -3,6 +3,9 @@
     <string name="enter">Entrar</string>
     <string name="channel_title">Nome do meu canal de podcasts</string>
     <string name="podcast_title">Nome do podcast</string>
+    <string name="podcast_name_hint">Digite o nome do podcast</string>
+    <string name="podcast_description_hint">Digite a descrição</string>
+    <string name="podcast_file_hint">Selecione o arquivo</string>
 
 
     <string name="app_title_content_description">Titulo do aplicativo (PodCaps)</string>

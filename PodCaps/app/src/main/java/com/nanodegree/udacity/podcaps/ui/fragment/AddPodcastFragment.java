@@ -8,26 +8,26 @@ import android.view.ViewGroup;
 
 import com.nanodegree.udacity.podcaps.R;
 
-public class ChannelFragment extends Fragment {
 
-    public ChannelFragment() {
+public class AddPodcastFragment extends Fragment {
+
+    public AddPodcastFragment() {
     }
 
-    public static ChannelFragment newInstance(String param1, String param2) {
-        ChannelFragment fragment = new ChannelFragment();
-        Bundle args = new Bundle();
-        fragment.setArguments(args);
+    public static AddPodcastFragment newInstance(String param1, String param2) {
+        AddPodcastFragment fragment = new AddPodcastFragment();
         return fragment;
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_channel, container, false);
+        return inflater.inflate(R.layout.fragment_add_podcast, container, false);
     }
 }

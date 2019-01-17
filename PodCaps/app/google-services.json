@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "496019931753",
+    "firebase_url": "https://podcaps-49717.firebaseio.com",
+    "project_id": "podcaps-49717",
+    "storage_bucket": "podcaps-49717.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:496019931753:android:72182e014aeebd54",
+        "android_client_info": {
+          "package_name": "com.nanodegree.udacity.podcaps"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "496019931753-hhgnskdevj17n4dqlg41ktgl5c9oukpg.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAEbNRe50BDNTb_0lfepjf1Ljwte9f3Ijk"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

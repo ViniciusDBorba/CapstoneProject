@@ -12,6 +12,8 @@ import com.nanodegree.udacity.podcaps.data.daos.UserDao;
 import com.nanodegree.udacity.podcaps.data.models.UserEntity;
 import com.nanodegree.udacity.podcaps.data.services.UserFirebaseService;
 
+import java.util.List;
+
 public class UserManager {
     private final UserManagerListener listener;
     private UserFirebaseService firebaseService;
@@ -31,15 +33,20 @@ public class UserManager {
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                 if (task.getResult() == null || task.getResult().isEmpty()) {
                     listener.user(null);
+                    return;
                 }
 
-                DocumentSnapshot doc = task.getResult().getDocuments().get(0);
-                if (doc.exists()) {
-                    UserEntity user = doc.getData() == null || doc.getData().isEmpty() ? null : new UserEntity(doc);
-                    listener.user(user);
-                } else {
-                    listener.user(null);
+                List<DocumentSnapshot> docs = task.getResult().getDocuments();
+
+                if (!docs.isEmpty()) {
+                    DocumentSnapshot doc = docs.get(0);
+                    if (doc.exists()) {
+                        UserEntity user = doc.getData() == null || doc.getData().isEmpty() ? null : new UserEntity(doc);
+                        listener.user(user);
+                        return;
+                    }
                 }
+                listener.user(null);
             }
         });
     }

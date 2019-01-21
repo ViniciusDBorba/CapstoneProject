@@ -25,25 +25,26 @@ class LoginPresenter extends BaseFirebaseService implements UserManager.UserMana
     }
 
     void login() {
+        activity.setLoading(true);
         String text = this.activity.emailEdit.getText().toString();
-        if (text == null || text.isEmpty())
+        if (text == null || text.isEmpty()) {
             activity.emptyEmailError();
+            activity.setLoading(false);
+            return;
+        }
 
         userManager.getUserByEmail(text);
     }
 
     @Override
     public void user(UserEntity user) {
-
         if (user == null) {
             userManager.newUser(this.activity.emailEdit.getText().toString());
         } else {
             user.setLogged(true);
             userManager.saveUser(user);
         }
-
-
-
         activity.doLogin();
+
     }
 }

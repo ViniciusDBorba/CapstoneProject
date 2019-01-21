@@ -9,28 +9,23 @@
     android:orientation="vertical"
     tools:context=".ui.activity.MainActivity">
 
-    <android.support.v4.widget.NestedScrollView
+
+    <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-        <android.support.constraint.ConstraintLayout
+        <FrameLayout
+            android:id="@+id/fragment_container"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior">
+            android:layout_height="match_parent"
+            android:background="@color/default_background"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </android.support.constraint.ConstraintLayout>
 
-            <FrameLayout
-                android:id="@+id/fragment_container"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@color/default_background"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-        </android.support.constraint.ConstraintLayout>
-
-    </android.support.v4.widget.NestedScrollView>
 
     <android.support.design.widget.AppBarLayout
         android:id="@+id/main_appbar"
@@ -92,10 +87,10 @@
                     android:contentDescription="@string/podcast_image_content_description"
                     android:progressBackgroundTint="@color/app_icon_light_grey"
                     android:progressTint="@color/app_icon_light_grey"
-                    app:layout_constraintTop_toBottomOf="@+id/podcast_image_container"
                     app:layout_constraintBottom_toTopOf="@+id/podcast_control_pause"
                     app:layout_constraintLeft_toLeftOf="parent"
-                    app:layout_constraintRight_toRightOf="parent" />
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/podcast_image_container" />
 
                 <ImageView
                     android:id="@+id/podcast_control_next"
@@ -141,7 +136,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="68dp"
                 app:layout_collapseMode="pin"
-                app:layout_scrollFlags="scroll|exitUntilCollapsed"
                 app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
 
                 <LinearLayout

@@ -4,9 +4,8 @@ import com.nanodegree.udacity.podcaps.utils.FireBaseUtils;
 
 public class BaseFirebaseService {
 
-    public FireBaseUtils firebase;
+    public FireBaseUtils firebase = new FireBaseUtils();
 
     public void BasePresenter() {
-        firebase = new FireBaseUtils();
     }
 }

@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/default_background"
-    tools:context=".ui.fragment.ChannelFragment">
+    tools:context=".ui.fragment.channel.ChannelFragment">
 
     <LinearLayout
         android:id="@+id/channel_header"

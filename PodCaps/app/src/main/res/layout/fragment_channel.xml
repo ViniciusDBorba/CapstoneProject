@@ -60,11 +60,11 @@
         android:id="@+id/channel_edit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_margin="10dp"
         android:contentDescription="@string/channel_edit_content_description"
         android:tint="@android:color/white"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:layout_margin="10dp"
         app:srcCompat="@drawable/ic_edit" />
 
     <android.support.v7.widget.RecyclerView
@@ -78,6 +78,17 @@
         app:layout_constraintTop_toBottomOf="@+id/channel_header">
 
     </android.support.v7.widget.RecyclerView>
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/add_podcast"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:background="@color/colorAccent"
+        app:srcCompat="@drawable/ic_add"
+        android:tint="@android:color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintRight_toRightOf="parent" />
 
 
 </android.support.constraint.ConstraintLayout>

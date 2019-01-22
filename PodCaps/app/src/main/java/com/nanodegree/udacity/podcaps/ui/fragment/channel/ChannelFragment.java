@@ -11,11 +11,14 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.nanodegree.udacity.podcaps.R;
+import com.nanodegree.udacity.podcaps.ui.fragment.AddPodcastFragment;
+import com.nanodegree.udacity.podcaps.ui.fragment.BaseFragment;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
-public class ChannelFragment extends Fragment {
+public class ChannelFragment extends BaseFragment {
 
     @BindView(R.id.channel_podcast_list)
     RecyclerView myPodcastList;
@@ -46,5 +49,10 @@ public class ChannelFragment extends Fragment {
 
         myPodcastList.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
         myPodcastList.setAdapter(presenter.getAdapter());
+    }
+
+    @OnClick(R.id.add_podcast)
+    public void addPodcast() {
+        switchFragment(new AddPodcastFragment(), false);
     }
 }

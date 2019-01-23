@@ -14,7 +14,7 @@ public class ChannelPodcastItemViewHolder extends BaseViewHolder<PodcastEntity> 
 
     @BindView(R.id.podcast_title)
     TextView podcastName;
-    @BindView(R.id.podcast_title)
+    @BindView(R.id.podcast_description)
     TextView podcastDescription;
 
     public ChannelPodcastItemViewHolder(@NonNull View itemView) {

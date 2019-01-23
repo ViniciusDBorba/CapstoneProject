@@ -19,7 +19,7 @@
 
 
         <ImageView
-            android:id="@+id/podcast_image"
+            android:id="@+id/channel_image"
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:layout_gravity="center"
@@ -42,6 +42,21 @@
             android:textSize="18sp"
             android:textStyle="bold" />
 
+
+        <EditText
+            android:id="@+id/channel_title_edit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp"
+            android:contentDescription="@string/channel_title_content_description"
+            android:hint="@string/channel_title"
+            android:textColorHint="@color/fount_dark_grey"
+            android:textColor="@android:color/white"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:visibility="gone"/>
+
         <TextView
             android:id="@+id/channel_description"
             android:layout_width="match_parent"
@@ -53,6 +68,20 @@
             android:padding="5dp"
             android:text="@string/channel_title"
             android:textColor="@android:color/white" />
+
+        <EditText
+            android:id="@+id/channel_description_edit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp"
+            android:contentDescription="@string/channel_description_content_description"
+            android:gravity="center"
+            android:hint="@string/channel_title"
+            android:paddingLeft="5dp"
+            android:textColor="@android:color/white"
+            android:textColorHint="@color/fount_dark_grey"
+            android:visibility="gone" />
 
     </LinearLayout>
 
@@ -85,10 +114,10 @@
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
         android:background="@color/colorAccent"
-        app:srcCompat="@drawable/ic_add"
         android:tint="@android:color/white"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintRight_toRightOf="parent" />
+        app:layout_constraintRight_toRightOf="parent"
+        app:srcCompat="@drawable/ic_add" />
 
 
 </android.support.constraint.ConstraintLayout>

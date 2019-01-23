@@ -1,21 +1,32 @@
 package com.nanodegree.udacity.podcaps.data.models;
 
 import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.PrimaryKey;
 
 import java.time.LocalDateTime;
 
 @Entity(tableName = "podcasts")
 public class PodcastEntity {
 
+    @PrimaryKey
+    private int id;
     private String name;
     private String description;
     private String userEmail;
     private String timesPlayed;
     private String duration;
     private String url;
-    private LocalDateTime uploadDate;
+    private String uploadDate;
 
     public PodcastEntity() {
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -66,11 +77,11 @@ public class PodcastEntity {
         this.url = url;
     }
 
-    public LocalDateTime getUploadDate() {
+    public String getUploadDate() {
         return uploadDate;
     }
 
-    public void setUploadDate(LocalDateTime uploadDate) {
+    public void setUploadDate(String uploadDate) {
         this.uploadDate = uploadDate;
     }
 }

@@ -15,6 +15,9 @@ public class UserEntity {
     @NonNull
     private String email = "";
     private boolean logged;
+    private String channelName;
+    private String channelDescription;
+    private String channelImage;
 
     public UserEntity() {
     }
@@ -23,12 +26,14 @@ public class UserEntity {
     public UserEntity(String email) {
         this.email = email;
         logged = false;
+        channelName = "";
     }
 
     @Ignore
     public UserEntity(DocumentSnapshot data) {
         this.email = data.getString("email");
         logged = false;
+        channelName = data.getString("channelName");
     }
 
     public String getEmail() {
@@ -45,5 +50,29 @@ public class UserEntity {
 
     public void setLogged(boolean logged) {
         this.logged = logged;
+    }
+
+    public String getChannelName() {
+        return channelName;
+    }
+
+    public void setChannelName(String channelName) {
+        this.channelName = channelName;
+    }
+
+    public String getChannelDescription() {
+        return channelDescription;
+    }
+
+    public void setChannelDescription(String channelDescription) {
+        this.channelDescription = channelDescription;
+    }
+
+    public String getChannelImage() {
+        return channelImage;
+    }
+
+    public void setChannelImage(String channelImage) {
+        this.channelImage = channelImage;
     }
 }

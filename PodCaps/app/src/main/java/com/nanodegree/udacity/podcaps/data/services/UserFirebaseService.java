@@ -20,7 +20,7 @@ public class UserFirebaseService extends BaseFirebaseService {
         return collection.whereEqualTo("email", text).get();
     }
 
-    public Task<DocumentReference> newUser(UserEntity user) {
+    public Task<DocumentReference> saveUser(UserEntity user) {
         return collection.add(user);
     }
 }

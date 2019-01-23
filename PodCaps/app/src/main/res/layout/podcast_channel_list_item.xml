@@ -6,7 +6,7 @@
     android:background="@color/default_background">
 
     <ImageView
-        android:id="@+id/podcast_image"
+        android:id="@+id/channel_image"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
@@ -31,8 +31,8 @@
         android:text="@string/podcast_title"
         android:textColor="@android:color/white"
         android:textStyle="bold"
-        app:layout_constraintLeft_toRightOf="@+id/podcast_image"
-        app:layout_constraintTop_toTopOf="@+id/podcast_image" />
+        app:layout_constraintLeft_toRightOf="@+id/channel_image"
+        app:layout_constraintTop_toTopOf="@+id/channel_image" />
 
 
     <TextView
@@ -46,7 +46,7 @@
         android:maxLines="2"
         android:text="@string/podcast_title"
         android:textColor="@color/fount_dark_grey"
-        app:layout_constraintLeft_toRightOf="@+id/podcast_image"
+        app:layout_constraintLeft_toRightOf="@+id/channel_image"
         app:layout_constraintTop_toBottomOf="@+id/podcast_title" />
 
 

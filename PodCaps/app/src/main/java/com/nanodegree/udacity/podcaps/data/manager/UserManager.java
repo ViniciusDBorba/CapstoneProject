@@ -53,9 +53,8 @@ public class UserManager {
 
     public void newUser(String email) {
         UserEntity user = new UserEntity(email);
-        firebaseService.newUser(user);
         user.setLogged(true);
-        userDao.insert(user);
+        saveUser(user);
     }
 
     public UserEntity getLoggedUser() {
@@ -63,10 +62,12 @@ public class UserManager {
     }
 
     public void saveUser(UserEntity user) {
+        firebaseService.saveUser(user);
         userDao.insert(user);
     }
 
     public interface UserManagerListener {
         void user(UserEntity user);
+        void userSaved(UserEntity user);
     }
 }

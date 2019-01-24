@@ -7,6 +7,9 @@
     <string name="podcast_name_hint">Digite o nome do podcast</string>
     <string name="podcast_description_hint">Digite a descrição</string>
     <string name="podcast_file_hint">Selecione o arquivo</string>
+    <string name="channel_image_select">Selecione a imagem do canal</string>
+    <string name="channel_image_storage_path">%s/images/%s</string>
+    <string name="percent">%d%%</string>
 
 
     <string name="app_title_content_description">Titulo do aplicativo (PodCaps)</string>

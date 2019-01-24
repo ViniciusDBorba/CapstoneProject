@@ -1,16 +1,17 @@
 package com.nanodegree.udacity.podcaps.ui.fragment.channel;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.text.Editable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -27,6 +28,7 @@ import butterknife.OnClick;
 
 public class ChannelFragment extends BaseFragment {
 
+    private static final int SELECT_IMAGE = 1;
     @BindView(R.id.channel_podcast_list)
     RecyclerView myPodcastList;
     @BindView(R.id.channel_title)
@@ -41,6 +43,10 @@ public class ChannelFragment extends BaseFragment {
     ImageView channelImage;
     @BindView(R.id.channel_edit)
     ImageView channelEditButton;
+    @BindView(R.id.image_load)
+    ProgressBar imageProgress;
+    @BindView(R.id.loading_image_container)
+    View imageContainer;
 
     private ChannelPresenter presenter;
     private boolean editing;
@@ -59,7 +65,6 @@ public class ChannelFragment extends BaseFragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_channel, container, false);
         ButterKnife.bind(this, view);
-
         return view;
     }
 
@@ -69,6 +74,20 @@ public class ChannelFragment extends BaseFragment {
         myPodcastList.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
         myPodcastList.setAdapter(presenter.getAdapter());
         presenter.getChannelData();
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (data == null || data.getData() == null)
+            return;
+
+        switch (requestCode) {
+            case SELECT_IMAGE:
+                presenter.uploadChannelImage(data.getData());
+                break;
+            default:
+                break;
+        }
     }
 
     @OnClick(R.id.channel_edit)
@@ -93,7 +112,10 @@ public class ChannelFragment extends BaseFragment {
     @OnClick(R.id.channel_image)
     public void editChannelImage() {
         if (editing) {
-            presenter.uploadChannelImage();
+            Intent i = new Intent(Intent.ACTION_GET_CONTENT);
+            i.setType("image/*");
+
+            startActivityForResult(Intent.createChooser(i, getResources().getString(R.string.channel_image_select)), SELECT_IMAGE);
         }
     }
 
@@ -104,17 +126,17 @@ public class ChannelFragment extends BaseFragment {
 
     public void updateView(UserEntity user) {
         String channelName = user.getChannelName();
-        if (!channelName.isEmpty()) {
+        if (channelName != null && !channelName.isEmpty()) {
             channelTitle.setText(channelName);
         }
 
         String channelDescription = user.getChannelDescription();
-        if (!channelDescription.isEmpty()) {
+        if (channelDescription != null && !channelDescription.isEmpty()) {
             channelDescriptionView.setText(channelDescription);
         }
 
         String channelImageUrl = user.getChannelImage();
-        if (!channelImageUrl.isEmpty()) {
+        if (channelImageUrl != null && !channelImageUrl.isEmpty()) {
             RequestOptions requestOptions = new RequestOptions();
             requestOptions = requestOptions
                     .centerInside()
@@ -128,4 +150,12 @@ public class ChannelFragment extends BaseFragment {
 
     }
 
+    public void updateImageProgress(double progress) {
+        imageProgress.setProgress((int) progress);
+    }
+
+    public void togleImageUploadProgressBar(boolean isInit) {
+        imageProgress.setVisibility(isInit ? View.VISIBLE : View.GONE);
+        imageContainer.setVisibility(isInit ? View.VISIBLE : View.GONE);
+    }
 }

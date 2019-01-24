@@ -47,4 +47,14 @@ class LoginPresenter extends BaseFirebaseService implements UserManager.UserMana
         activity.doLogin();
 
     }
+
+    @Override
+    public void userSaved(UserEntity user) {
+        // TODO: 24/01/2019 - implement loader to user save
+    }
+
+    @Override
+    public void imageUploadProgress(double string) {
+
+    }
 }

@@ -1,6 +1,6 @@
 package com.nanodegree.udacity.podcaps.ui.fragment.channel;
 
-import android.text.Editable;
+import android.net.Uri;
 
 import com.nanodegree.udacity.podcaps.data.manager.PodcastManager;
 import com.nanodegree.udacity.podcaps.data.manager.UserManager;
@@ -30,16 +30,27 @@ public class ChannelPresenter implements UserManager.UserManagerListener, Podcas
     }
 
     public void getChannelData() {
-        userManager.getLoggedUser();
+        this.user = userManager.getLoggedUser();
+        podcastManager.getPodcastsByEmail(user.getEmail());
+        fragment.updateView(user);
     }
 
     public void saveChannelData() {
         String channelName = fragment.channelTitleEdit.getText().toString();
         String channelDescription = fragment.channelDescriptionEdit.getText().toString();
-        user.setChannelName(channelName);
-        user.setChannelDescription(fragment.channelDescriptionEdit.getText().toString());
+
+        if (!channelName.isEmpty())
+            user.setChannelName(channelName);
+        if (!channelDescription.isEmpty())
+            user.setChannelDescription(channelDescription);
+
         fragment.updateView(user);
         userManager.saveUser(user);
+    }
+
+    void uploadChannelImage(Uri data) {
+        fragment.togleImageUploadProgressBar(true);
+        userManager.saveChannelImage(data, fragment.getContext());
     }
 
     @Override
@@ -52,15 +63,20 @@ public class ChannelPresenter implements UserManager.UserManagerListener, Podcas
     @Override
     public void userSaved(UserEntity user) {
         // TODO: 23/01/2019 - implement a loading to show when user is saved
+
+        fragment.updateView(user);
+    }
+
+    @Override
+    public void imageUploadProgress(double progress) {
+        fragment.updateImageProgress(progress);
+        if (progress >= 100)
+            fragment.togleImageUploadProgressBar(false);
     }
 
     @Override
     public void podcasts(List<PodcastEntity> podcasts) {
         this.adapter.addPodcasts(podcasts);
         this.adapter.notifyDataSetChanged();
-    }
-
-    public void uploadChannelImage() {
-        // TODO: 23/01/2019 implement channel image upload
     }
 }

@@ -10,6 +10,10 @@
     <string name="channel_image_select">Selecione a imagem do canal</string>
     <string name="channel_image_storage_path">%s/images/%s</string>
     <string name="percent">%d%%</string>
+    <string name="podcast_file_select">Selecione o arquivo de audio do podcast</string>
+    <string name="podcast_image_select">Selecione a imagem do podcast</string>
+    <string name="channel_podcast_list_empty">Você ainda não adicionou nenhum podcast</string>
+
 
 
     <string name="app_title_content_description">Titulo do aplicativo (PodCaps)</string>
@@ -30,6 +34,7 @@
     <string name="podcast_star_content_description">Botão de adicionar ou remover podcast a lista de favoritos</string>
     <string name="podcast_favorites_remove_content_description">Clique para remover da lista de favoritos</string>
     <string name="podcast_channel_remove_content_description">Clique para excluir este podcast</string>
+    <string name="podcast_add_buttom_content_description">Clique para salvar este podcast</string>
     <string name="channel_image_content_description">Imagem do canal</string>
     <string name="my_podcast_list_content_description">Lista contendo os seus podcasts</string>
     <string name="channel_title_content_description">Titulo do canal</string>
@@ -40,7 +45,8 @@
     <string name="title_channel">Canal</string>
     <string name="title_podcast_list">Podcasts</string>
     <string name="title_favorites">Favoritos</string>
-
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="podcast_empty_name">O nome do podcast não pode ser vazio</string>
+    <string name="podcast_file_null">Selecione o arquivo de audio</string>
+    <string name="podcast_file_storage_path">%s/podcasts/%s</string>
+    <string name="podcast_image_storage_path">%s/images/%s</string>
 </resources>

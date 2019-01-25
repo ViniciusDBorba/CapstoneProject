@@ -68,7 +68,7 @@ public class ChannelPresenter implements UserManager.UserManagerListener, Podcas
     }
 
     @Override
-    public void imageUploadProgress(double progress) {
+    public void channelImageUploadProgress(double progress) {
         fragment.updateImageProgress(progress);
         if (progress >= 100)
             fragment.togleImageUploadProgressBar(false);
@@ -76,7 +76,27 @@ public class ChannelPresenter implements UserManager.UserManagerListener, Podcas
 
     @Override
     public void podcasts(List<PodcastEntity> podcasts) {
+        if (podcasts == null || podcasts.isEmpty()) {
+            fragment.togglePodcastListEmptyText(false);
+            return;
+        }
+        fragment.togglePodcastListEmptyText(true);
         this.adapter.addPodcasts(podcasts);
         this.adapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void podcastSaved(PodcastEntity podcastEntity) {
+
+    }
+
+    @Override
+    public void uploadPodcastProgress(int progress) {
+
+    }
+
+    @Override
+    public void uploadPodcastImageProgress(int progress) {
+
     }
 }

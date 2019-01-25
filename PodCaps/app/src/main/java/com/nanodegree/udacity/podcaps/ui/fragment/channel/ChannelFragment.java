@@ -19,8 +19,8 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.request.RequestOptions;
 import com.nanodegree.udacity.podcaps.R;
 import com.nanodegree.udacity.podcaps.data.models.UserEntity;
-import com.nanodegree.udacity.podcaps.ui.fragment.AddPodcastFragment;
 import com.nanodegree.udacity.podcaps.ui.fragment.BaseFragment;
+import com.nanodegree.udacity.podcaps.ui.fragment.addPodcast.AddPodcastFragment;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -47,6 +47,8 @@ public class ChannelFragment extends BaseFragment {
     ProgressBar imageProgress;
     @BindView(R.id.loading_image_container)
     View imageContainer;
+    @BindView(R.id.empty_podcast_list)
+    TextView emptyList;
 
     private ChannelPresenter presenter;
     private boolean editing;
@@ -157,5 +159,9 @@ public class ChannelFragment extends BaseFragment {
     public void togleImageUploadProgressBar(boolean isInit) {
         imageProgress.setVisibility(isInit ? View.VISIBLE : View.GONE);
         imageContainer.setVisibility(isInit ? View.VISIBLE : View.GONE);
+    }
+
+    public void togglePodcastListEmptyText(boolean visible) {
+        emptyList.setVisibility(visible ? View.VISIBLE : View.GONE);
     }
 }

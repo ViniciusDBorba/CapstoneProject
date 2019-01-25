@@ -7,6 +7,8 @@ import android.support.annotation.NonNull;
 
 import com.google.firebase.firestore.DocumentSnapshot;
 
+import java.util.Objects;
+
 
 @Entity(tableName = "users")
 public class UserEntity {
@@ -31,9 +33,11 @@ public class UserEntity {
 
     @Ignore
     public UserEntity(DocumentSnapshot data) {
-        this.email = data.getString("email");
-        logged = false;
+        this.email = Objects.requireNonNull(data.getString("email"));
+        channelDescription = data.getString("channelDescription");
+        channelImage = data.getString("channelDescription");
         channelName = data.getString("channelName");
+        logged = false;
     }
 
     public String getEmail() {

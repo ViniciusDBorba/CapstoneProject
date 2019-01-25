@@ -29,4 +29,19 @@ public class PodcastListPresenter implements PodcastManager.PodcastManagerListen
     public void podcasts(List<PodcastEntity> podcasts) {
 
     }
+
+    @Override
+    public void podcastSaved(PodcastEntity podcastEntity) {
+
+    }
+
+    @Override
+    public void uploadPodcastProgress(int progress) {
+
+    }
+
+    @Override
+    public void uploadPodcastImageProgress(int progress) {
+
+    }
 }

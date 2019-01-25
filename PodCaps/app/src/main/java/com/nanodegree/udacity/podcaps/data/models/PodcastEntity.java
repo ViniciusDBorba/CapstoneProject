@@ -1,14 +1,16 @@
 package com.nanodegree.udacity.podcaps.data.models;
 
 import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.Ignore;
 import android.arch.persistence.room.PrimaryKey;
 
-import java.time.LocalDateTime;
+import com.google.firebase.firestore.DocumentSnapshot;
 
 @Entity(tableName = "podcasts")
 public class PodcastEntity {
 
-    @PrimaryKey
+
+    @PrimaryKey(autoGenerate = true)
     private int id;
     private String name;
     private String description;
@@ -17,8 +19,26 @@ public class PodcastEntity {
     private String duration;
     private String url;
     private String uploadDate;
+    private String imageUrl;
 
     public PodcastEntity() {
+    }
+
+    @Ignore
+    public PodcastEntity(UserEntity loggedUser) {
+        userEmail = loggedUser.getEmail();
+    }
+
+    @Ignore
+    public PodcastEntity(DocumentSnapshot data) {
+        id = (int) data.get("id");
+        name = data.getString("name");
+        description = data.getString("description");
+        userEmail = data.getString("userEmail");
+        duration = data.getString("duration");
+        url = data.getString("url");
+        uploadDate = data.getString("uploadDate");
+        imageUrl = data.getString("imageUrl");
     }
 
     public int getId() {
@@ -83,5 +103,13 @@ public class PodcastEntity {
 
     public void setUploadDate(String uploadDate) {
         this.uploadDate = uploadDate;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
 }

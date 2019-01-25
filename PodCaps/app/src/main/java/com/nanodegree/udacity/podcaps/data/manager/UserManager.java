@@ -4,7 +4,6 @@ import android.content.Context;
 import android.net.Uri;
 import android.support.annotation.NonNull;
 
-import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
@@ -33,7 +32,6 @@ public class UserManager {
         this.listener = listener;
 
     }
-
 
     public void getUserByEmail(String text) {
         firebaseService.getUserByEmail(text).addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
@@ -71,10 +69,10 @@ public class UserManager {
 
     public void saveUser(final UserEntity user) {
         userDao.insert(user);
-        Task<DocumentReference> task = firebaseService.saveUser(user);
-        task.addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
+        Task<Void> task = firebaseService.saveUser(user);
+        task.addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
-            public void onComplete(@NonNull Task<DocumentReference> task) {
+            public void onComplete(@NonNull Task<Void> task) {
                 if (task.isSuccessful()) {
                     listener.userSaved(user);
                 }
@@ -105,7 +103,7 @@ public class UserManager {
                     public void onProgress(UploadTask.TaskSnapshot taskSnapshot) {
                         double progress = (100.0 * taskSnapshot.getBytesTransferred() / taskSnapshot
                                 .getTotalByteCount());
-                        listener.imageUploadProgress(progress);
+                        listener.channelImageUploadProgress(progress);
                     }
                 });
 //                .addOnFailureListener(new OnFailureListener() {
@@ -122,6 +120,6 @@ public class UserManager {
 
         void userSaved(UserEntity user);
 
-        void imageUploadProgress(double string);
+        void channelImageUploadProgress(double string);
     }
 }

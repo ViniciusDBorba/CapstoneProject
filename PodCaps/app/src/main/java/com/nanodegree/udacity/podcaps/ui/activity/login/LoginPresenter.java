@@ -54,7 +54,7 @@ class LoginPresenter extends BaseFirebaseService implements UserManager.UserMana
     }
 
     @Override
-    public void imageUploadProgress(double string) {
+    public void channelImageUploadProgress(double string) {
 
     }
 }

@@ -4,7 +4,6 @@ import android.net.Uri;
 
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.CollectionReference;
-import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
@@ -24,8 +23,8 @@ public class UserFirebaseService extends BaseFirebaseService {
         return collection.whereEqualTo("email", text).get();
     }
 
-    public Task<DocumentReference> saveUser(UserEntity user) {
-        return collection.add(user);
+    public Task<Void> saveUser(UserEntity user) {
+        return collection.document(user.getEmail()).set(user);
     }
 
     public UploadTask uploadChannelImage(Uri imageUri, String path) {

@@ -19,8 +19,8 @@ public class FireBaseUtils {
         return storage.getReference();
     }
 
-    public CollectionReference getCollection(String user) {
-        return db.collection(user);
+    public CollectionReference getCollection(String collection) {
+        return db.collection(collection);
     }
 
     public StorageReference getStorage(String path) {

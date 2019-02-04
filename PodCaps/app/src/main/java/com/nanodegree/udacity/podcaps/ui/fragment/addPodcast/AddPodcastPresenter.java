@@ -27,6 +27,8 @@ public class AddPodcastPresenter implements PodcastManager.PodcastManagerListene
     }
 
     void savePodcast() {
+
+
         if (fragment.selectedAudioPath == null) {
             fragment.setEmptyError();
             return;

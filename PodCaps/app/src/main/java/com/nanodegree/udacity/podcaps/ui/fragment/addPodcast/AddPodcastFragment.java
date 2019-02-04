@@ -5,6 +5,7 @@ import android.media.MediaMetadataRetriever;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +15,7 @@ import android.widget.ImageView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.request.RequestOptions;
+import com.google.android.gms.dynamic.IFragmentWrapper;
 import com.nanodegree.udacity.podcaps.R;
 
 import butterknife.BindView;
@@ -117,5 +119,9 @@ public class AddPodcastFragment extends Fragment {
     @OnClick(R.id.add_podcast)
     public void savePodcast() {
         presenter.savePodcast();
+
+        FragmentManager fragmentManager = getFragmentManager();
+        if (fragmentManager != null)
+            fragmentManager.popBackStack();
     }
 }

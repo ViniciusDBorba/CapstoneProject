@@ -31,7 +31,7 @@ public class PodcastEntity {
 
     @Ignore
     public PodcastEntity(DocumentSnapshot data) {
-        id = (int) data.get("id");
+        id = data.getLong("id").intValue();
         name = data.getString("name");
         description = data.getString("description");
         userEmail = data.getString("userEmail");

@@ -1,6 +1,5 @@
 package com.nanodegree.udacity.podcaps.data.manager;
 
-import android.accessibilityservice.GestureDescription;
 import android.content.Context;
 import android.net.Uri;
 import android.support.annotation.NonNull;
@@ -8,16 +7,13 @@ import android.support.annotation.NonNull;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.UploadTask;
-import com.nanodegree.udacity.podcaps.R;
 import com.nanodegree.udacity.podcaps.data.AppDatabase;
 import com.nanodegree.udacity.podcaps.data.daos.PodcastDao;
 import com.nanodegree.udacity.podcaps.data.models.PodcastEntity;
-import com.nanodegree.udacity.podcaps.data.models.UserEntity;
 import com.nanodegree.udacity.podcaps.data.services.PodcastFirebaseService;
 
 import java.util.ArrayList;

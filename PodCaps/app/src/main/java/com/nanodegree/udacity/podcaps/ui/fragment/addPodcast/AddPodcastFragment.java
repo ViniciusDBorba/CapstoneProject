@@ -1,6 +1,7 @@
 package com.nanodegree.udacity.podcaps.ui.fragment.addPodcast;
 
 import android.content.Intent;
+import android.media.MediaMetadataRetriever;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;

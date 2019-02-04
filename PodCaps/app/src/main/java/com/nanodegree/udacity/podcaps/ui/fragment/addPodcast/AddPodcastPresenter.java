@@ -1,5 +1,6 @@
 package com.nanodegree.udacity.podcaps.ui.fragment.addPodcast;
 
+import android.media.MediaMetadataRetriever;
 import android.text.Editable;
 
 import com.nanodegree.udacity.podcaps.R;
@@ -40,6 +41,11 @@ public class AddPodcastPresenter implements PodcastManager.PodcastManagerListene
         Editable description = fragment.podcastDescription.getText();
         if (description != null || !description.toString().isEmpty())
             podcast.setDescription(description.toString());
+
+        MediaMetadataRetriever metadataRetriever = new MediaMetadataRetriever();
+        metadataRetriever.setDataSource(fragment.getContext(),fragment.selectedAudioPath);
+        String duration = metadataRetriever.extractMetadata(MediaMetadataRetriever.METADATA_KEY_DURATION);
+        podcast.setDuration(duration);
 
         manager.savePodcast(podcast);
 

@@ -7,10 +7,11 @@ import com.nanodegree.udacity.podcaps.data.manager.UserManager;
 import com.nanodegree.udacity.podcaps.data.models.PodcastEntity;
 import com.nanodegree.udacity.podcaps.data.models.UserEntity;
 import com.nanodegree.udacity.podcaps.ui.fragment.adapter.ChannelPodcastAdapter;
+import com.nanodegree.udacity.podcaps.ui.fragment.viewHolder.ChannelPodcastItemViewHolder;
 
 import java.util.List;
 
-public class ChannelPresenter implements UserManager.UserManagerListener, PodcastManager.PodcastManagerListener {
+public class ChannelPresenter implements UserManager.UserManagerListener, PodcastManager.PodcastManagerListener, ChannelPodcastItemViewHolder.ChannelPodcastViewHolderListener {
 
     private final ChannelFragment fragment;
     private ChannelPodcastAdapter adapter;
@@ -77,11 +78,12 @@ public class ChannelPresenter implements UserManager.UserManagerListener, Podcas
     @Override
     public void podcasts(List<PodcastEntity> podcasts) {
         if (podcasts == null || podcasts.isEmpty()) {
-            fragment.togglePodcastListEmptyText(false);
+            fragment.togglePodcastListEmptyText(true);
             return;
         }
-        fragment.togglePodcastListEmptyText(true);
+        fragment.togglePodcastListEmptyText(false);
         this.adapter.addPodcasts(podcasts);
+        this.adapter.setListener(this);
         this.adapter.notifyDataSetChanged();
     }
 
@@ -98,5 +100,10 @@ public class ChannelPresenter implements UserManager.UserManagerListener, Podcas
     @Override
     public void uploadPodcastImageProgress(int progress) {
 
+    }
+
+    @Override
+    public void removePodcast(PodcastEntity podcastEntity) {
+        podcastManager.remove(podcastEntity);
     }
 }

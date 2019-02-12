@@ -8,13 +8,15 @@ import android.view.ViewGroup;
 
 import com.nanodegree.udacity.podcaps.R;
 import com.nanodegree.udacity.podcaps.data.models.PodcastEntity;
+import com.nanodegree.udacity.podcaps.ui.fragment.channel.ChannelPresenter;
 import com.nanodegree.udacity.podcaps.ui.fragment.viewHolder.ChannelPodcastItemViewHolder;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class ChannelPodcastAdapter extends RecyclerView.Adapter<ChannelPodcastItemViewHolder> {
+public class ChannelPodcastAdapter extends RecyclerView.Adapter<ChannelPodcastItemViewHolder> implements ChannelPodcastItemViewHolder.ChannelPodcastViewHolderListener {
     List<PodcastEntity> myPodcasts = new ArrayList<>();
+    private ChannelPodcastItemViewHolder.ChannelPodcastViewHolderListener listener;
 
     @NonNull
     @Override
@@ -25,7 +27,7 @@ public class ChannelPodcastAdapter extends RecyclerView.Adapter<ChannelPodcastIt
 
     @Override
     public void onBindViewHolder(@NonNull ChannelPodcastItemViewHolder channelPodcastItemViewHolder, int i) {
-        channelPodcastItemViewHolder.bind(getItem(i));
+        channelPodcastItemViewHolder.bind(getItem(i), this);
     }
 
     private PodcastEntity getItem(int i) {
@@ -36,8 +38,21 @@ public class ChannelPodcastAdapter extends RecyclerView.Adapter<ChannelPodcastIt
         myPodcasts.addAll(podcasts);
     }
 
+    public void setListener(ChannelPodcastItemViewHolder.ChannelPodcastViewHolderListener listener) {
+        this.listener = listener;
+    }
+
     @Override
     public int getItemCount() {
         return myPodcasts.size();
     }
+
+    @Override
+    public void removePodcast(PodcastEntity podcastEntity) {
+        listener.removePodcast(podcastEntity);
+        myPodcasts.remove(podcastEntity);
+        notifyDataSetChanged();
+    }
+
+
 }

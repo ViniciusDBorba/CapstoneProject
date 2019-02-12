@@ -75,6 +75,12 @@ public class PodcastManager {
         podcastDao.insert(podcastEntity);
     }
 
+    public void remove(PodcastEntity podcastEntity) {
+        firebaseService.removePodcast(podcastEntity);
+        podcastDao.remove(podcastEntity);
+        getPodcastsByEmail(podcastEntity.getUserEmail());
+    }
+
     public void uploadPodcastFile(Uri selectedAudioPath, final PodcastEntity podcast, final String path) {
         UploadTask task = firebaseService.uploadFile(selectedAudioPath, path);
         task
@@ -125,7 +131,6 @@ public class PodcastManager {
                     }
                 });
     }
-
 
     public interface PodcastManagerListener {
         void podcasts(List<PodcastEntity> podcasts);

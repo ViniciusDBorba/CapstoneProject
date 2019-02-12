@@ -34,4 +34,8 @@ public class PodcastFirebaseService extends BaseFirebaseService {
     public Task<QuerySnapshot> getPodcastsByEmail(String email) {
         return collection.whereEqualTo("userEmail", email).get();
     }
+
+    public void removePodcast(PodcastEntity podcastEntity) {
+        collection.document(String.valueOf(podcastEntity.getId())).delete();
+    }
 }

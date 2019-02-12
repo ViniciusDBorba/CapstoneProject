@@ -54,5 +54,10 @@ public class ChannelPodcastAdapter extends RecyclerView.Adapter<ChannelPodcastIt
         notifyDataSetChanged();
     }
 
+    @Override
+    public void selectPodcast(PodcastEntity podcast) {
+        listener.selectPodcast(podcast);
+    }
+
 
 }

@@ -1,6 +1,7 @@
 package com.nanodegree.udacity.podcaps.ui.fragment.viewHolder;
 
 import android.support.annotation.NonNull;
+import android.support.constraint.ConstraintLayout;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -14,6 +15,8 @@ import butterknife.OnClick;
 
 public class ChannelPodcastItemViewHolder extends BaseViewHolder<PodcastEntity> {
 
+    @BindView(R.id.channel_list_item_layout)
+    ConstraintLayout layout;
     @BindView(R.id.podcast_title)
     TextView podcastName;
     @BindView(R.id.podcast_description)
@@ -36,6 +39,12 @@ public class ChannelPodcastItemViewHolder extends BaseViewHolder<PodcastEntity> 
         podcastDescription.setText(podcastEntity.getDescription());
     }
 
+    @OnClick(R.id.channel_list_item_layout)
+    void selectPodcast() {
+        listener.selectPodcast(podcast);
+    }
+
+
     @OnClick(R.id.podcast_remove_button)
     void removePodcast() {
         listener.removePodcast(podcast);
@@ -44,5 +53,7 @@ public class ChannelPodcastItemViewHolder extends BaseViewHolder<PodcastEntity> 
 
     public interface ChannelPodcastViewHolderListener {
         void removePodcast(PodcastEntity podcastEntity);
+
+        void selectPodcast(PodcastEntity podcast);
     }
 }

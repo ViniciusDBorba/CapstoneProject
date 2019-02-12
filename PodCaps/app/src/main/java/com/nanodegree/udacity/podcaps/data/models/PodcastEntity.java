@@ -20,6 +20,7 @@ public class PodcastEntity {
     private String url;
     private String uploadDate;
     private String imageUrl;
+    private boolean selected;
 
     public PodcastEntity() {
     }
@@ -111,5 +112,13 @@ public class PodcastEntity {
 
     public void setImageUrl(String imageUrl) {
         this.imageUrl = imageUrl;
+    }
+
+    public boolean isSelected() {
+        return selected;
+    }
+
+    public void setSelected(boolean selected) {
+        this.selected = selected;
     }
 }

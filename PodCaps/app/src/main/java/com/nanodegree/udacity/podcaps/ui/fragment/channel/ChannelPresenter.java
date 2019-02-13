@@ -109,7 +109,6 @@ public class ChannelPresenter implements UserManager.UserManagerListener, Podcas
 
     @Override
     public void selectPodcast(PodcastEntity podcast) {
-        podcast.setSelected(true);
-        podcastManager.savePodcast(podcast);
+        podcastManager.selectPodcast(podcast);
     }
 }

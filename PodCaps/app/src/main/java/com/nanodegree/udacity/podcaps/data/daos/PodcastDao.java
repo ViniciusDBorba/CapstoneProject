@@ -23,6 +23,13 @@ public interface PodcastDao {
     @Query("SELECT * FROM podcasts WHERE podcasts.userEmail == :email")
     LiveData<PodcastEntity> getByEmail(String email);
 
+    @Query("SELECT * FROM podcasts WHERE podcasts.selected == 'true'")
+    PodcastEntity getSelected();
+
+    @Query("SELECT * FROM podcasts WHERE podcasts.selected == 'true'")
+    LiveData<PodcastEntity> getSelectedLive();
+
     @Delete()
     void remove(PodcastEntity podcast);
+
 }

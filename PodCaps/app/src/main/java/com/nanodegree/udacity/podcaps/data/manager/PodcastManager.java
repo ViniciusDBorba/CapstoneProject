@@ -63,7 +63,8 @@ public class PodcastManager {
     }
 
     public void savePodcast(final PodcastEntity podcastEntity) {
-        if (podcastEntity.getUrl() != null && !podcastEntity.getUrl().isEmpty())
+        if (podcastEntity.getUrl() != null && !podcastEntity.getUrl().isEmpty()) {
+            podcastEntity.setSelected(false);
             firebaseService.savePodcast(podcastEntity).addOnCompleteListener(new OnCompleteListener<Void>() {
                 @Override
                 public void onComplete(@NonNull Task<Void> task) {
@@ -72,6 +73,7 @@ public class PodcastManager {
                     }
                 }
             });
+        }
         podcastDao.insert(podcastEntity);
     }
 
@@ -130,6 +132,16 @@ public class PodcastManager {
                         listener.uploadPodcastImageProgress((int) progress);
                     }
                 });
+    }
+
+    public void selectPodcast(PodcastEntity podcast) {
+        PodcastEntity selectedPodcast = podcastDao.getSelected();
+        if (selectedPodcast != null){
+            selectedPodcast.setSelected(false);
+            savePodcast(selectedPodcast);
+        }
+        podcast.setSelected(true);
+        savePodcast(podcast);
     }
 
     public interface PodcastManagerListener {

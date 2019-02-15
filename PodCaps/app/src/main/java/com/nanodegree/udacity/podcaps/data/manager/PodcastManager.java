@@ -1,8 +1,10 @@
 package com.nanodegree.udacity.podcaps.data.manager;
 
+import android.arch.lifecycle.Observer;
 import android.content.Context;
 import android.net.Uri;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -136,12 +138,27 @@ public class PodcastManager {
 
     public void selectPodcast(PodcastEntity podcast) {
         PodcastEntity selectedPodcast = podcastDao.getSelected();
-        if (selectedPodcast != null){
+        if (selectedPodcast != null) {
             selectedPodcast.setSelected(false);
             savePodcast(selectedPodcast);
         }
         podcast.setSelected(true);
         savePodcast(podcast);
+    }
+
+    public void getSelectedPodcast() {
+        podcastDao.getSelectedLive().observeForever(new Observer<PodcastEntity>() {
+            @Override
+            public void onChanged(@Nullable final PodcastEntity podcastEntity) {
+                if (podcastEntity == null)
+                    return;
+
+                listener.podcasts(new ArrayList<PodcastEntity>() {{
+                    add(podcastEntity);
+                }});
+            }
+        });
+
     }
 
     public interface PodcastManagerListener {

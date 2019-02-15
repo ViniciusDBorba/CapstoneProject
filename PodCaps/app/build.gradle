@@ -60,4 +60,7 @@ dependencies {
     implementation 'com.google.firebase:firebase-core:16.0.6'
     implementation 'com.google.firebase:firebase-firestore:17.1.5'
     implementation 'com.google.firebase:firebase-storage:16.0.5'
+
+    implementation 'com.google.android.exoplayer:exoplayer:2.9.0'
+    implementation 'com.google.android.exoplayer:exoplayer-core:2.9.0'
 }

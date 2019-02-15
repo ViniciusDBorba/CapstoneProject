@@ -7,7 +7,17 @@ import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.BottomNavigationView;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
+import android.widget.SeekBar;
 
+import com.google.android.exoplayer2.ExoPlayerFactory;
+import com.google.android.exoplayer2.SimpleExoPlayer;
+import com.google.android.exoplayer2.source.ExtractorMediaSource;
+import com.google.android.exoplayer2.source.MediaSource;
+import com.google.android.exoplayer2.ui.PlayerView;
+import com.google.android.exoplayer2.upstream.DataSource;
+import com.google.android.exoplayer2.upstream.DefaultDataSourceFactory;
+import com.google.android.exoplayer2.util.Util;
 import com.nanodegree.udacity.podcaps.R;
 import com.nanodegree.udacity.podcaps.ui.fragment.channel.ChannelFragment;
 import com.nanodegree.udacity.podcaps.ui.fragment.FavoritesPodcastList;
@@ -26,6 +36,24 @@ public class MainActivity extends BaseActivity {
 
     @BindView(R.id.podcast_controls_toolbar_container)
     ConstraintLayout toolbarPodcastControllerLayout;
+
+    @BindView(R.id.podcast_control_progress)
+    SeekBar podcastProgress;
+
+    @BindView(R.id.podcast_control_next)
+    ImageView podcastNext;
+
+    @BindView(R.id.podcast_control_pause)
+    ImageView podcastPause;
+
+    @BindView(R.id.podcast_control_back)
+    ImageView podcastBack;
+
+    @BindView(R.id.player_view)
+    PlayerView playerView;
+
+
+    MainPresenter presenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,9 +82,15 @@ public class MainActivity extends BaseActivity {
                 }
             }
         });
+        presenter = new MainPresenter(this);
+        presenter.configPlayer();
 
         switchFragment(new PodcastListFragment(), true);
 
+    }
+
+    public void setPlayer(SimpleExoPlayer player) {
+        playerView.setPlayer(player);
     }
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
@@ -78,4 +112,5 @@ public class MainActivity extends BaseActivity {
             return false;
         }
     };
+
 }

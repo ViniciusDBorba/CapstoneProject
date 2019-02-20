@@ -32,7 +32,13 @@ public class MainPresenter implements PodcastManager.PodcastManagerListener {
         manager.getSelectedPodcast();
     }
 
-    public void playPodcast() {
+    public void playPausePodcast() {
+        if (player.getPlayWhenReady()) {
+            player.stop();
+            player.setPlayWhenReady(false);
+        } else {
+            player.setPlayWhenReady(true);
+        }
 
     }
 

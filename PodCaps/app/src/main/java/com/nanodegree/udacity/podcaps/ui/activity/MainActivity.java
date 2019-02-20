@@ -1,23 +1,15 @@
 package com.nanodegree.udacity.podcaps.ui.activity;
 
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.constraint.ConstraintLayout;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.BottomNavigationView;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.SeekBar;
 
-import com.google.android.exoplayer2.ExoPlayerFactory;
 import com.google.android.exoplayer2.SimpleExoPlayer;
-import com.google.android.exoplayer2.source.ExtractorMediaSource;
-import com.google.android.exoplayer2.source.MediaSource;
 import com.google.android.exoplayer2.ui.PlayerView;
-import com.google.android.exoplayer2.upstream.DataSource;
-import com.google.android.exoplayer2.upstream.DefaultDataSourceFactory;
-import com.google.android.exoplayer2.util.Util;
 import com.nanodegree.udacity.podcaps.R;
 import com.nanodegree.udacity.podcaps.ui.fragment.channel.ChannelFragment;
 import com.nanodegree.udacity.podcaps.ui.fragment.FavoritesPodcastList;
@@ -25,6 +17,7 @@ import com.nanodegree.udacity.podcaps.ui.fragment.podcastList.PodcastListFragmen
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 public class MainActivity extends BaseActivity {
 
@@ -94,23 +87,28 @@ public class MainActivity extends BaseActivity {
     }
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
-            = new BottomNavigationView.OnNavigationItemSelectedListener() {
+            = item -> {
+                switch (item.getItemId()) {
+                    case R.id.navigation_channel:
+                        switchFragment(new ChannelFragment(),true);
+                        return true;
+                    case R.id.navigation_podcast_list:
+                        switchFragment(new PodcastListFragment(), true);
+                        return true;
+                    case R.id.navigation_favorites:
+                        switchFragment(new FavoritesPodcastList(), true);
+                        return true;
+                }
+                return false;
+            };
 
-        @Override
-        public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-            switch (item.getItemId()) {
-                case R.id.navigation_channel:
-                    switchFragment(new ChannelFragment(),true);
-                    return true;
-                case R.id.navigation_podcast_list:
-                    switchFragment(new PodcastListFragment(), true);
-                    return true;
-                case R.id.navigation_favorites:
-                    switchFragment(new FavoritesPodcastList(), true);
-                    return true;
-            }
-            return false;
-        }
-    };
+    @OnClick(R.id.podcast_control_pause)
+    void playButton() {
+        presenter.playPausePodcast();
+    }
+    @OnClick(R.id.podcast_control_pause_toolbar)
+    void playButtonTollbar() {
+        presenter.playPausePodcast();
+    }
 
 }

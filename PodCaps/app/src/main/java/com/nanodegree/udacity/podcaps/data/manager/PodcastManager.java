@@ -38,41 +38,35 @@ public class PodcastManager {
 
     public void getPodcastsByEmail(String email) {
         firebaseService.getPodcastsByEmail(email)
-                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        if (task.getResult() == null || task.getResult().isEmpty()) {
-                            listener.podcasts(null);
-                            return;
-                        }
-
-                        List<DocumentSnapshot> docs = task.getResult().getDocuments();
-
-                        if (!docs.isEmpty()) {
-                            List<PodcastEntity> podcasts = new ArrayList<>();
-                            for (DocumentSnapshot doc : docs) {
-                                if (doc.exists()) {
-                                    PodcastEntity podcastEntity = doc.getData() == null || doc.getData().isEmpty() ? null : new PodcastEntity(doc);
-                                    podcasts.add(podcastEntity);
-                                }
-                            }
-                            listener.podcasts(podcasts);
-                            return;
-                        }
+                .addOnCompleteListener(task -> {
+                    if (task.getResult() == null || task.getResult().isEmpty()) {
                         listener.podcasts(null);
+                        return;
                     }
+
+                    List<DocumentSnapshot> docs = task.getResult().getDocuments();
+
+                    if (!docs.isEmpty()) {
+                        List<PodcastEntity> podcasts = new ArrayList<>();
+                        for (DocumentSnapshot doc : docs) {
+                            if (doc.exists()) {
+                                PodcastEntity podcastEntity = doc.getData() == null || doc.getData().isEmpty() ? null : new PodcastEntity(doc);
+                                podcasts.add(podcastEntity);
+                            }
+                        }
+                        listener.podcasts(podcasts);
+                        return;
+                    }
+                    listener.podcasts(null);
                 });
     }
 
     public void savePodcast(final PodcastEntity podcastEntity) {
         if (podcastEntity.getUrl() != null && !podcastEntity.getUrl().isEmpty()) {
             podcastEntity.setSelected(false);
-            firebaseService.savePodcast(podcastEntity).addOnCompleteListener(new OnCompleteListener<Void>() {
-                @Override
-                public void onComplete(@NonNull Task<Void> task) {
-                    if (task.isSuccessful()) {
-                        listener.podcastSaved(podcastEntity);
-                    }
+            firebaseService.savePodcast(podcastEntity).addOnCompleteListener(task -> {
+                if (task.isSuccessful()) {
+                    listener.podcastSaved(podcastEntity);
                 }
             });
         }
@@ -88,51 +82,29 @@ public class PodcastManager {
     public void uploadPodcastFile(Uri selectedAudioPath, final PodcastEntity podcast, final String path) {
         UploadTask task = firebaseService.uploadFile(selectedAudioPath, path);
         task
-                .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                    @Override
-                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                        firebaseService.getStorageRef(path).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-                            @Override
-                            public void onSuccess(Uri uri) {
-                                podcast.setUploadDate(new Date().toString());
-                                podcast.setUrl(uri.toString());
-                                savePodcast(podcast);
-                            }
-                        });
-                    }
-                })
-                .addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
-                    @Override
-                    public void onProgress(UploadTask.TaskSnapshot taskSnapshot) {
-                        double progress = (100.0 * taskSnapshot.getBytesTransferred() / taskSnapshot
-                                .getTotalByteCount());
-                        listener.uploadPodcastProgress((int) progress);
-                    }
+                .addOnSuccessListener(taskSnapshot -> firebaseService.getStorageRef(path).getDownloadUrl().addOnSuccessListener(uri -> {
+                    podcast.setUploadDate(new Date().toString());
+                    podcast.setUrl(uri.toString());
+                    savePodcast(podcast);
+                }))
+                .addOnProgressListener(taskSnapshot -> {
+                    double progress = (100.0 * taskSnapshot.getBytesTransferred() / taskSnapshot
+                            .getTotalByteCount());
+                    listener.uploadPodcastProgress((int) progress);
                 });
     }
 
     public void uploadPodcastImage(Uri selectedImagePath, final PodcastEntity podcast, final String path) {
         UploadTask task = firebaseService.uploadFile(selectedImagePath, path);
         task
-                .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                    @Override
-                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                        firebaseService.getStorageRef(path).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-                            @Override
-                            public void onSuccess(Uri uri) {
-                                podcast.setImageUrl(uri.toString());
-                                savePodcast(podcast);
-                            }
-                        });
-                    }
-                })
-                .addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
-                    @Override
-                    public void onProgress(UploadTask.TaskSnapshot taskSnapshot) {
-                        double progress = (100.0 * taskSnapshot.getBytesTransferred() / taskSnapshot
-                                .getTotalByteCount());
-                        listener.uploadPodcastImageProgress((int) progress);
-                    }
+                .addOnSuccessListener(taskSnapshot -> firebaseService.getStorageRef(path).getDownloadUrl().addOnSuccessListener(uri -> {
+                    podcast.setImageUrl(uri.toString());
+                    savePodcast(podcast);
+                }))
+                .addOnProgressListener(taskSnapshot -> {
+                    double progress = (100.0 * taskSnapshot.getBytesTransferred() / taskSnapshot
+                            .getTotalByteCount());
+                    listener.uploadPodcastImageProgress((int) progress);
                 });
     }
 
@@ -147,16 +119,13 @@ public class PodcastManager {
     }
 
     public void getSelectedPodcast() {
-        podcastDao.getSelectedLive().observeForever(new Observer<PodcastEntity>() {
-            @Override
-            public void onChanged(@Nullable final PodcastEntity podcastEntity) {
-                if (podcastEntity == null)
-                    return;
+        podcastDao.getSelectedLive().observeForever(podcastEntity -> {
+            if (podcastEntity == null)
+                return;
 
-                listener.podcasts(new ArrayList<PodcastEntity>() {{
-                    add(podcastEntity);
-                }});
-            }
+            listener.podcasts(new ArrayList<PodcastEntity>() {{
+                add(podcastEntity);
+            }});
         });
 
     }

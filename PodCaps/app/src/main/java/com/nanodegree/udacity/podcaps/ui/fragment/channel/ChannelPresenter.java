@@ -1,5 +1,6 @@
 package com.nanodegree.udacity.podcaps.ui.fragment.channel;
 
+import android.arch.lifecycle.LifecycleOwner;
 import android.net.Uri;
 
 import com.nanodegree.udacity.podcaps.data.manager.PodcastManager;
@@ -100,6 +101,11 @@ public class ChannelPresenter implements UserManager.UserManagerListener, Podcas
     @Override
     public void uploadPodcastImageProgress(int progress) {
 
+    }
+
+    @Override
+    public LifecycleOwner getLifecycle() {
+        return fragment;
     }
 
     @Override

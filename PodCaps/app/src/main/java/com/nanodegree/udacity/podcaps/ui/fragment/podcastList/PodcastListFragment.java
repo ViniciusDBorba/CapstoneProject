@@ -1,5 +1,6 @@
 package com.nanodegree.udacity.podcaps.ui.fragment.podcastList;
 
+import android.arch.lifecycle.LifecycleOwner;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -16,7 +17,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 
-public class PodcastListFragment extends Fragment {
+public class PodcastListFragment extends Fragment implements LifecycleOwner {
 
 
 

@@ -1,6 +1,6 @@
 package com.nanodegree.udacity.podcaps.ui.fragment.podcastList;
 
-import android.support.v4.app.Fragment;
+import android.arch.lifecycle.LifecycleOwner;
 
 import com.nanodegree.udacity.podcaps.data.manager.PodcastManager;
 import com.nanodegree.udacity.podcaps.data.models.PodcastEntity;
@@ -43,5 +43,10 @@ public class PodcastListPresenter implements PodcastManager.PodcastManagerListen
     @Override
     public void uploadPodcastImageProgress(int progress) {
 
+    }
+
+    @Override
+    public LifecycleOwner getLifecycle() {
+        return fragment;
     }
 }

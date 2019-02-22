@@ -1,5 +1,6 @@
 package com.nanodegree.udacity.podcaps.ui.activity;
 
+import android.arch.lifecycle.LifecycleOwner;
 import android.os.Bundle;
 import android.support.constraint.ConstraintLayout;
 import android.support.design.widget.AppBarLayout;
@@ -19,7 +20,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class MainActivity extends BaseActivity {
+public class MainActivity extends BaseActivity implements LifecycleOwner {
 
     @BindView(R.id.navigation)
     BottomNavigationView navigation;

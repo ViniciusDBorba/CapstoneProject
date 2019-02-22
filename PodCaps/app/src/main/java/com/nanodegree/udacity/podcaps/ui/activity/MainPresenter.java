@@ -1,5 +1,7 @@
 package com.nanodegree.udacity.podcaps.ui.activity;
 
+import android.arch.lifecycle.LifecycleOwner;
+import android.media.MediaPlayer;
 import android.net.Uri;
 
 import com.google.android.exoplayer2.ExoPlayerFactory;
@@ -12,13 +14,14 @@ import com.google.android.exoplayer2.util.Util;
 import com.nanodegree.udacity.podcaps.data.manager.PodcastManager;
 import com.nanodegree.udacity.podcaps.data.models.PodcastEntity;
 
+import java.io.IOException;
 import java.util.List;
 
 public class MainPresenter implements PodcastManager.PodcastManagerListener {
 
     private MainActivity activity;
     private PodcastManager manager;
-    private SimpleExoPlayer player;
+    private MediaPlayer mediaPlayer;
 
     public MainPresenter(MainActivity mainActivity) {
         this.activity = mainActivity;
@@ -26,18 +29,15 @@ public class MainPresenter implements PodcastManager.PodcastManagerListener {
     }
 
     public void configPlayer() {
-        SimpleExoPlayer player = ExoPlayerFactory.newSimpleInstance(activity);
-        activity.setPlayer(player);
-        this.player = player;
+        this.mediaPlayer = new MediaPlayer();
         manager.getSelectedPodcast();
     }
 
     public void playPausePodcast() {
-        if (player.getPlayWhenReady()) {
-            player.stop();
-            player.setPlayWhenReady(false);
+        if (mediaPlayer.isPlaying()) {
+            mediaPlayer.pause();
         } else {
-            player.setPlayWhenReady(true);
+            mediaPlayer.start();
         }
 
     }
@@ -46,13 +46,13 @@ public class MainPresenter implements PodcastManager.PodcastManagerListener {
     public void podcasts(List<PodcastEntity> podcasts) {
         if (podcasts.isEmpty())
             return;
-
-        DataSource.Factory dataSourceFactory = new DefaultDataSourceFactory(activity,
-                Util.getUserAgent(activity, "PodCaps"));
-        Uri uri = new Uri.Builder().path(podcasts.get(0).getUrl()).build();
-        MediaSource audioSource = new ExtractorMediaSource.Factory(dataSourceFactory)
-                .createMediaSource(uri);
-        player.prepare(audioSource);
+        try {
+            mediaPlayer.setDataSource(podcasts.get(0).getUrl());
+            mediaPlayer.setVolume(100, 100);
+            mediaPlayer.prepare();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -68,5 +68,10 @@ public class MainPresenter implements PodcastManager.PodcastManagerListener {
     @Override
     public void uploadPodcastImageProgress(int progress) {
 
+    }
+
+    @Override
+    public LifecycleOwner getLifecycle() {
+        return activity;
     }
 }

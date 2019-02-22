@@ -1,17 +1,10 @@
 package com.nanodegree.udacity.podcaps.data.manager;
 
-import android.arch.lifecycle.Observer;
+import android.arch.lifecycle.LifecycleOwner;
 import android.content.Context;
 import android.net.Uri;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentSnapshot;
-import com.google.firebase.firestore.QuerySnapshot;
-import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.UploadTask;
 import com.nanodegree.udacity.podcaps.data.AppDatabase;
 import com.nanodegree.udacity.podcaps.data.daos.PodcastDao;
@@ -63,7 +56,6 @@ public class PodcastManager {
 
     public void savePodcast(final PodcastEntity podcastEntity) {
         if (podcastEntity.getUrl() != null && !podcastEntity.getUrl().isEmpty()) {
-            podcastEntity.setSelected(false);
             firebaseService.savePodcast(podcastEntity).addOnCompleteListener(task -> {
                 if (task.isSuccessful()) {
                     listener.podcastSaved(podcastEntity);
@@ -109,7 +101,7 @@ public class PodcastManager {
     }
 
     public void selectPodcast(PodcastEntity podcast) {
-        PodcastEntity selectedPodcast = podcastDao.getSelected();
+        PodcastEntity selectedPodcast = podcastDao.getSelected(true);
         if (selectedPodcast != null) {
             selectedPodcast.setSelected(false);
             savePodcast(selectedPodcast);
@@ -119,7 +111,7 @@ public class PodcastManager {
     }
 
     public void getSelectedPodcast() {
-        podcastDao.getSelectedLive().observeForever(podcastEntity -> {
+        podcastDao.getSelectedLive(true).observe(listener.getLifecycle(), podcastEntity -> {
             if (podcastEntity == null)
                 return;
 
@@ -138,5 +130,7 @@ public class PodcastManager {
         void uploadPodcastProgress(int progress);
 
         void uploadPodcastImageProgress(int progress);
+
+        LifecycleOwner getLifecycle();
     }
 }

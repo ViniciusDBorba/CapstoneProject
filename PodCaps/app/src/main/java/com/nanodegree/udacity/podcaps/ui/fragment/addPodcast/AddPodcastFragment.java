@@ -1,5 +1,6 @@
 package com.nanodegree.udacity.podcaps.ui.fragment.addPodcast;
 
+import android.arch.lifecycle.LifecycleOwner;
 import android.content.Intent;
 import android.media.MediaMetadataRetriever;
 import android.net.Uri;
@@ -23,7 +24,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 
-public class AddPodcastFragment extends Fragment {
+public class AddPodcastFragment extends Fragment implements LifecycleOwner {
 
 
     private static final int SELECT_PODCAST = 2;

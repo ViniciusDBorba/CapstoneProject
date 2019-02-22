@@ -1,5 +1,6 @@
 package com.nanodegree.udacity.podcaps.ui.fragment.channel;
 
+import android.arch.lifecycle.LifecycleOwner;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -26,7 +27,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class ChannelFragment extends BaseFragment {
+public class ChannelFragment extends BaseFragment implements LifecycleOwner {
 
     private static final int SELECT_IMAGE = 1;
     @BindView(R.id.channel_podcast_list)

@@ -1,5 +1,6 @@
 package com.nanodegree.udacity.podcaps.ui.fragment.addPodcast;
 
+import android.arch.lifecycle.LifecycleOwner;
 import android.media.MediaMetadataRetriever;
 import android.text.Editable;
 
@@ -74,6 +75,11 @@ public class AddPodcastPresenter implements PodcastManager.PodcastManagerListene
     @Override
     public void uploadPodcastImageProgress(int progress) {
 
+    }
+
+    @Override
+    public LifecycleOwner getLifecycle() {
+        return fragment;
     }
 
     @Override

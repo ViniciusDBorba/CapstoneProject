@@ -9,11 +9,9 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.SeekBar;
 
-import com.google.android.exoplayer2.SimpleExoPlayer;
-import com.google.android.exoplayer2.ui.PlayerView;
 import com.nanodegree.udacity.podcaps.R;
-import com.nanodegree.udacity.podcaps.ui.fragment.channel.ChannelFragment;
 import com.nanodegree.udacity.podcaps.ui.fragment.FavoritesPodcastList;
+import com.nanodegree.udacity.podcaps.ui.fragment.channel.ChannelFragment;
 import com.nanodegree.udacity.podcaps.ui.fragment.podcastList.PodcastListFragment;
 
 import butterknife.BindView;
@@ -42,9 +40,6 @@ public class MainActivity extends BaseActivity implements LifecycleOwner {
 
     @BindView(R.id.podcast_control_back)
     ImageView podcastBack;
-
-    @BindView(R.id.player_view)
-    PlayerView playerView;
 
 
     MainPresenter presenter;
@@ -83,10 +78,6 @@ public class MainActivity extends BaseActivity implements LifecycleOwner {
 
     }
 
-    public void setPlayer(SimpleExoPlayer player) {
-        playerView.setPlayer(player);
-    }
-
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = item -> {
                 switch (item.getItemId()) {
@@ -112,4 +103,7 @@ public class MainActivity extends BaseActivity implements LifecycleOwner {
         presenter.playPausePodcast();
     }
 
+    public void updatePlayButton(boolean isPlaing) {
+
+    }
 }

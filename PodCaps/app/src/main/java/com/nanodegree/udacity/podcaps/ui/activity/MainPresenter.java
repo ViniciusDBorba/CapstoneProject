@@ -2,19 +2,10 @@ package com.nanodegree.udacity.podcaps.ui.activity;
 
 import android.arch.lifecycle.LifecycleOwner;
 import android.media.MediaPlayer;
-import android.net.Uri;
 
-import com.google.android.exoplayer2.ExoPlayerFactory;
-import com.google.android.exoplayer2.SimpleExoPlayer;
-import com.google.android.exoplayer2.source.ExtractorMediaSource;
-import com.google.android.exoplayer2.source.MediaSource;
-import com.google.android.exoplayer2.upstream.DataSource;
-import com.google.android.exoplayer2.upstream.DefaultDataSourceFactory;
-import com.google.android.exoplayer2.util.Util;
 import com.nanodegree.udacity.podcaps.data.manager.PodcastManager;
 import com.nanodegree.udacity.podcaps.data.models.PodcastEntity;
 
-import java.io.IOException;
 import java.util.List;
 
 public class MainPresenter implements PodcastManager.PodcastManagerListener {
@@ -36,10 +27,10 @@ public class MainPresenter implements PodcastManager.PodcastManagerListener {
     public void playPausePodcast() {
         if (mediaPlayer.isPlaying()) {
             mediaPlayer.pause();
+            activity.updatePlayButton(false);
         } else {
             mediaPlayer.start();
         }
-
     }
 
     @Override

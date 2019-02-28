@@ -65,6 +65,10 @@ public class PodcastManager {
         podcastDao.insert(podcastEntity);
     }
 
+    public void updatePodcast(final PodcastEntity podcastEntity) {
+        podcastDao.insert(podcastEntity);
+    }
+
     public void remove(PodcastEntity podcastEntity) {
         firebaseService.removePodcast(podcastEntity);
         podcastDao.remove(podcastEntity);
@@ -104,10 +108,10 @@ public class PodcastManager {
         PodcastEntity selectedPodcast = podcastDao.getSelected(true);
         if (selectedPodcast != null) {
             selectedPodcast.setSelected(false);
-            savePodcast(selectedPodcast);
+            updatePodcast(selectedPodcast);
         }
         podcast.setSelected(true);
-        savePodcast(podcast);
+        updatePodcast(podcast);
     }
 
     public void getSelectedPodcast() {

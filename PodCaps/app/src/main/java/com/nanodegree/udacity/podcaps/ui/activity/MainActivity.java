@@ -8,6 +8,7 @@ import android.support.design.widget.BottomNavigationView;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.SeekBar;
+import android.widget.TextView;
 
 import com.nanodegree.udacity.podcaps.R;
 import com.nanodegree.udacity.podcaps.ui.fragment.FavoritesPodcastList;
@@ -43,6 +44,9 @@ public class MainActivity extends BaseActivity implements LifecycleOwner {
 
     @BindView(R.id.podcast_control_back)
     ImageView podcastBack;
+
+    @BindView(R.id.podcast_name)
+    TextView podcastName;
 
 
     MainPresenter presenter;
@@ -108,7 +112,11 @@ public class MainActivity extends BaseActivity implements LifecycleOwner {
     }
 
     public void updatePlayButton(boolean isPlaing) {
-        podcastPlayPause.setImageDrawable(getResources().getDrawable(isPlaing ? R.drawable.ic_play : R.drawable.ic_pause));
-        podcastPlayPauseToolbar.setImageDrawable(getResources().getDrawable(isPlaing ? R.drawable.ic_play : R.drawable.ic_pause));
+        podcastPlayPause.setImageDrawable(getResources().getDrawable(isPlaing ? R.drawable.ic_pause : R.drawable.ic_play));
+        podcastPlayPauseToolbar.setImageDrawable(getResources().getDrawable(isPlaing ? R.drawable.ic_pause : R.drawable.ic_play));
+    }
+
+    public void setPodcastName(String name) {
+        podcastName.setText(name);
     }
 }

@@ -69,7 +69,7 @@
                     android:layout_marginRight="30dp"
                     android:contentDescription="@string/podcast_image_content_description"
                     android:progressBackgroundTint="@color/app_icon_light_grey"
-                    android:progressTint="@color/app_icon_light_grey"
+                    android:progressTint="@android:color/white"
                     app:layout_constraintBottom_toTopOf="@+id/podcast_control_pause"
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintRight_toRightOf="parent"

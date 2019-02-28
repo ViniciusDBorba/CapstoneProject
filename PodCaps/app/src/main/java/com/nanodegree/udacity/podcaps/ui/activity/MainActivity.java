@@ -36,7 +36,10 @@ public class MainActivity extends BaseActivity implements LifecycleOwner {
     ImageView podcastNext;
 
     @BindView(R.id.podcast_control_pause)
-    ImageView podcastPause;
+    ImageView podcastPlayPause;
+
+    @BindView(R.id.podcast_control_pause_toolbar)
+    ImageView podcastPlayPauseToolbar;
 
     @BindView(R.id.podcast_control_back)
     ImageView podcastBack;
@@ -80,30 +83,32 @@ public class MainActivity extends BaseActivity implements LifecycleOwner {
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = item -> {
-                switch (item.getItemId()) {
-                    case R.id.navigation_channel:
-                        switchFragment(new ChannelFragment(),true);
-                        return true;
-                    case R.id.navigation_podcast_list:
-                        switchFragment(new PodcastListFragment(), true);
-                        return true;
-                    case R.id.navigation_favorites:
-                        switchFragment(new FavoritesPodcastList(), true);
-                        return true;
-                }
-                return false;
-            };
+        switch (item.getItemId()) {
+            case R.id.navigation_channel:
+                switchFragment(new ChannelFragment(), true);
+                return true;
+            case R.id.navigation_podcast_list:
+                switchFragment(new PodcastListFragment(), true);
+                return true;
+            case R.id.navigation_favorites:
+                switchFragment(new FavoritesPodcastList(), true);
+                return true;
+        }
+        return false;
+    };
 
     @OnClick(R.id.podcast_control_pause)
     void playButton() {
         presenter.playPausePodcast();
     }
+
     @OnClick(R.id.podcast_control_pause_toolbar)
     void playButtonTollbar() {
         presenter.playPausePodcast();
     }
 
     public void updatePlayButton(boolean isPlaing) {
-
+        podcastPlayPause.setImageDrawable(getResources().getDrawable(isPlaing ? R.drawable.ic_play : R.drawable.ic_pause));
+        podcastPlayPauseToolbar.setImageDrawable(getResources().getDrawable(isPlaing ? R.drawable.ic_play : R.drawable.ic_pause));
     }
 }

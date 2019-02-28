@@ -30,6 +30,7 @@ public class MainPresenter implements PodcastManager.PodcastManagerListener {
             activity.updatePlayButton(false);
         } else {
             mediaPlayer.start();
+            activity.updatePlayButton(true);
         }
     }
 

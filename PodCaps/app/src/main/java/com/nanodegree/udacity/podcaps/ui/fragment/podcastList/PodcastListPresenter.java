@@ -8,7 +8,7 @@ import com.nanodegree.udacity.podcaps.ui.fragment.adapter.PodcastAdapter;
 
 import java.util.List;
 
-public class PodcastListPresenter implements PodcastManager.PodcastManagerListener {
+public class PodcastListPresenter implements PodcastManager.PodcastManagerListener, PodcastAdapter.PodcastListListener {
 
     private final PodcastListFragment fragment;
     private PodcastAdapter adapter;
@@ -25,9 +25,30 @@ public class PodcastListPresenter implements PodcastManager.PodcastManagerListen
         return adapter;
     }
 
+    public void getPodcasts() {
+        manager.getPodcasts();
+    }
+
     @Override
     public void podcasts(List<PodcastEntity> podcasts) {
+        if (podcasts == null || podcasts.isEmpty()) {
+            fragment.togglePodcastListEmptyText(true);
+            return;
+        }
+        fragment.togglePodcastListEmptyText(false);
+        this.adapter.addPodcasts(podcasts);
+        this.adapter.setListener(this);
+        this.adapter.notifyDataSetChanged();
+    }
 
+    @Override
+    public void onClickPodcast(PodcastEntity podcast) {
+        manager.selectPodcast(podcast);
+    }
+
+    @Override
+    public void onClickFavorite(PodcastEntity podcast) {
+        // TODO: 06/03/2019 - implement favorites logic
     }
 
     @Override
@@ -49,4 +70,5 @@ public class PodcastListPresenter implements PodcastManager.PodcastManagerListen
     public LifecycleOwner getLifecycle() {
         return fragment;
     }
+
 }

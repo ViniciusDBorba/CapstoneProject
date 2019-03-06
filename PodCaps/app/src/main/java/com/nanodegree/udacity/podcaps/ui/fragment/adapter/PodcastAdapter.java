@@ -13,9 +13,10 @@ import com.nanodegree.udacity.podcaps.ui.fragment.viewHolder.PodcastItemViewHold
 import java.util.ArrayList;
 import java.util.List;
 
-public class PodcastAdapter extends RecyclerView.Adapter<PodcastItemViewHolder> {
+public class PodcastAdapter extends RecyclerView.Adapter<PodcastItemViewHolder> implements PodcastItemViewHolder.PodcastHolderListener {
 
     List<PodcastEntity> podcasts = new ArrayList<>();
+    private PodcastListListener listener;
 
     @NonNull
     @Override
@@ -26,11 +27,37 @@ public class PodcastAdapter extends RecyclerView.Adapter<PodcastItemViewHolder> 
 
     @Override
     public void onBindViewHolder(@NonNull PodcastItemViewHolder podcastItemViewHolder, int i) {
+        podcastItemViewHolder.setListener(this);
         podcastItemViewHolder.bind(podcasts.get(i));
     }
 
     @Override
     public int getItemCount() {
         return podcasts.size();
+    }
+
+    public void setListener(PodcastListListener listener) {
+        this.listener = listener;
+    }
+
+    public void addPodcasts(List<PodcastEntity> podcasts) {
+        this.podcasts.addAll(podcasts);
+    }
+
+    @Override
+    public void onClickPodcast(PodcastEntity podcast) {
+        listener.onClickPodcast(podcast);
+    }
+
+    @Override
+    public void onClickFavorite(PodcastEntity podcast) {
+        listener.onClickFavorite(podcast);
+    }
+
+    public interface PodcastListListener {
+
+        void onClickPodcast(PodcastEntity podcast);
+
+        void onClickFavorite(PodcastEntity podcast);
     }
 }

@@ -10,6 +10,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.nanodegree.udacity.podcaps.R;
 
@@ -23,6 +24,9 @@ public class PodcastListFragment extends Fragment implements LifecycleOwner {
 
     @BindView(R.id.podcast_list)
     RecyclerView podcastList;
+    @BindView(R.id.podcast_list_empty_text)
+    TextView podcastEmptyText;
+
     PodcastListPresenter presenter;
 
     public PodcastListFragment() {
@@ -49,5 +53,10 @@ public class PodcastListFragment extends Fragment implements LifecycleOwner {
 
         podcastList.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
         podcastList.setAdapter(presenter.getPodcastAdapter());
+        presenter.getPodcasts();
+    }
+
+    public void togglePodcastListEmptyText(boolean isVisible) {
+        podcastEmptyText.setVisibility(isVisible ? View.VISIBLE : View.GONE);
     }
 }

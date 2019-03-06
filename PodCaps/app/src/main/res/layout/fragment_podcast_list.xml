@@ -6,12 +6,30 @@
     android:background="@color/default_background"
     tools:context=".ui.fragment.podcastList.PodcastListFragment">
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/podcast_list"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/default_background">
+        android:layout_height="match_parent">
 
-    </android.support.v7.widget.RecyclerView>
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/podcast_list"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/default_background">
+
+        </android.support.v7.widget.RecyclerView>
+
+        <TextView
+            android:id="@+id/podcast_list_empty_text"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_centerInParent="true"
+            android:layout_centerHorizontal="true"
+            android:contentDescription="@string/podcast_list_empty"
+            android:gravity="center"
+            android:text="@string/podcast_list_empty"
+            android:textColor="@android:color/white"
+            android:textStyle="bold" />
+
+    </RelativeLayout>
 
 </android.support.v4.widget.NestedScrollView>

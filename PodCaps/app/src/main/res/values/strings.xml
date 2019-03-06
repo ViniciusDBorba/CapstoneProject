@@ -13,6 +13,7 @@
     <string name="podcast_file_select">Selecione o arquivo de audio do podcast</string>
     <string name="podcast_image_select">Selecione a imagem do podcast</string>
     <string name="channel_podcast_list_empty">Você ainda não adicionou nenhum podcast</string>
+    <string name="podcast_list_empty">Nenhum podcast encontrado</string>
 
 
 

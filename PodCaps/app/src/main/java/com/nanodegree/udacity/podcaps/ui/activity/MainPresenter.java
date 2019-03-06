@@ -1,8 +1,9 @@
 package com.nanodegree.udacity.podcaps.ui.activity;
 
 import android.arch.lifecycle.LifecycleOwner;
+import android.media.AudioManager;
 import android.media.MediaPlayer;
-import android.widget.SeekBar;
+import android.os.Handler;
 
 import com.nanodegree.udacity.podcaps.data.manager.PodcastManager;
 import com.nanodegree.udacity.podcaps.data.models.PodcastEntity;
@@ -11,11 +12,25 @@ import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
+
 public class MainPresenter implements PodcastManager.PodcastManagerListener {
 
     private MainActivity activity;
     private PodcastManager manager;
+
     private MediaPlayer mediaPlayer;
+    private int podcastProgress;
+    private int duration;
+
+    private Handler podcastProgressHandler = new Handler();
+    private Runnable UpdateSongTime = new Runnable() {
+        @Override
+        public void run() {
+            podcastProgress = mediaPlayer.getCurrentPosition();
+            activity.setPodcastProgress(podcastProgress);
+            podcastProgressHandler.postDelayed(this, 100);
+        }
+    };
 
     public MainPresenter(MainActivity mainActivity) {
         this.activity = mainActivity;
@@ -23,8 +38,14 @@ public class MainPresenter implements PodcastManager.PodcastManagerListener {
     }
 
     public void configPlayer() {
-        this.mediaPlayer = new MediaPlayer();
+        mediaPlayer = new MediaPlayer();
+        mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
+        mediaPlayer.setOnCompletionListener(mp -> {
+            mediaPlayer.stop();
+            activity.updatePlayButton(false);
+        });
         manager.getSelectedPodcast();
+
     }
 
     public void playPausePodcast() {
@@ -38,6 +59,36 @@ public class MainPresenter implements PodcastManager.PodcastManagerListener {
         }
     }
 
+    public void nextButtonPodcast() {
+        if ((podcastProgress + 500) <= duration) {
+            podcastProgress = podcastProgress + 500;
+            mediaPlayer.seekTo(podcastProgress);
+        }
+    }
+
+    public void backButtonPodcast() {
+        if ((podcastProgress - 500) >= 0) {
+            podcastProgress = podcastProgress - 500;
+            mediaPlayer.seekTo(podcastProgress);
+        }
+    }
+
+    private void startPlayerProgress() {
+        this.duration = mediaPlayer.getDuration();
+        this.podcastProgress = mediaPlayer.getDuration();
+        activity.setTotalPodcastTime(duration);
+        activity.setPodcastProgress(podcastProgress);
+
+        podcastProgressHandler.postDelayed(UpdateSongTime, 100);
+    }
+
+    public void onDestroyActivity() {
+        if (mediaPlayer != null) {
+            mediaPlayer.stop();
+            mediaPlayer.release();
+        }
+    }
+
     @Override
     public void podcasts(List<PodcastEntity> podcasts) {
         if (podcasts.isEmpty())
@@ -45,36 +96,12 @@ public class MainPresenter implements PodcastManager.PodcastManagerListener {
         try {
             PodcastEntity selectedPodcast = podcasts.get(0);
             mediaPlayer.setDataSource(selectedPodcast.getUrl());
-            mediaPlayer.setVolume(100, 100);
-            mediaPlayer.prepare();
-            mediaPlayer.setOnPreparedListener(mp -> {
-                activity.setPodcastName(selectedPodcast.getName());
-            });
-            mediaPlayer.setOnCompletionListener(mp -> {
-                activity.updatePlayButton(false);
-            });
+            mediaPlayer.setOnPreparedListener(mp -> activity.setPodcastName(selectedPodcast.getName()));
+            mediaPlayer.prepareAsync();
+
         } catch (Exception e) {
             e.printStackTrace();
         }
-    }
-
-    private void startPlayerProgress() {
-        final int duration = mediaPlayer.getDuration();
-        activity.podcastProgress.setMax(duration);
-        final int amoungToupdate = duration / 100;
-        Timer mTimer = new Timer();
-        mTimer.schedule(new TimerTask() {
-            @Override
-            public void run() {
-                activity.runOnUiThread(() -> {
-                    if (!(amoungToupdate * activity.podcastProgress.getProgress() >= duration)) {
-                        int p = activity.podcastProgress.getProgress();
-                        p += 1;
-                        activity.podcastProgress.setProgress(p);
-                    }
-                });
-            }
-        }, duration);
     }
 
     @Override
@@ -96,4 +123,5 @@ public class MainPresenter implements PodcastManager.PodcastManagerListener {
     public LifecycleOwner getLifecycle() {
         return activity;
     }
+
 }

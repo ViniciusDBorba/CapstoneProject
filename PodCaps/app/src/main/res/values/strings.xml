@@ -18,6 +18,7 @@
 
     <string name="app_title_content_description">Titulo do aplicativo (PodCaps)</string>
     <string name="app_icon_content_description">Ícone do aplicativo (Headset).</string>
+    <string name="podcast_time_content_description">Tempo do podcast.</string>
     <string name="email_login_edit_text_content_description">Digite seu email</string>
     <string name="login_button_content_description">Botão de entrar. (Clique para logar no aplicativo)</string>
     <string name="navigation_podcast_list_content_description">Opção da lista de podcasts do menu (Clique para acessar a lista de podcasts)</string>
@@ -49,4 +50,5 @@
     <string name="podcast_file_null">Selecione o arquivo de audio</string>
     <string name="podcast_file_storage_path">%s/podcasts/%s</string>
     <string name="podcast_image_storage_path">%s/images/%s</string>
+    <string name="podcast_duration_zero">00:00/00:00</string>
 </resources>

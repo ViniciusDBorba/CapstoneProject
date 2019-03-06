@@ -1,12 +1,15 @@
 package com.nanodegree.udacity.podcaps.ui.activity;
 
 import android.arch.lifecycle.LifecycleOwner;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.constraint.ConstraintLayout;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.BottomNavigationView;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
@@ -30,8 +33,8 @@ public class MainActivity extends BaseActivity implements LifecycleOwner {
     @BindView(R.id.podcast_controls_toolbar_container)
     ConstraintLayout toolbarPodcastControllerLayout;
 
-    @BindView(R.id.podcast_control_progress)
-    SeekBar podcastProgress;
+    @BindView(R.id.podcast_progress)
+    ProgressBar podcastProgress;
 
     @BindView(R.id.podcast_control_next)
     ImageView podcastNext;
@@ -80,9 +83,16 @@ public class MainActivity extends BaseActivity implements LifecycleOwner {
         });
         presenter = new MainPresenter(this);
         presenter.configPlayer();
+        podcastProgress.setClickable(false);
 
         switchFragment(new PodcastListFragment(), true);
 
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        presenter.onDestroyActivity();
     }
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
@@ -104,11 +114,31 @@ public class MainActivity extends BaseActivity implements LifecycleOwner {
     @OnClick(R.id.podcast_control_pause)
     void playButton() {
         presenter.playPausePodcast();
-    }
 
+    }
     @OnClick(R.id.podcast_control_pause_toolbar)
     void playButtonTollbar() {
         presenter.playPausePodcast();
+    }
+
+    @OnClick(R.id.podcast_control_next)
+    void nextButton() {
+        presenter.nextButtonPodcast();
+    }
+
+    @OnClick(R.id.podcast_control_next_toolbar)
+    void nextButtonTollbar() {
+        presenter.nextButtonPodcast();
+    }
+
+    @OnClick(R.id.podcast_control_back)
+    void backButton() {
+        presenter.backButtonPodcast();
+    }
+
+    @OnClick(R.id.podcast_control_back_toolbar)
+    void backButtonTollbar() {
+        presenter.backButtonPodcast();
     }
 
     public void updatePlayButton(boolean isPlaing) {
@@ -118,5 +148,13 @@ public class MainActivity extends BaseActivity implements LifecycleOwner {
 
     public void setPodcastName(String name) {
         podcastName.setText(name);
+    }
+
+    public void setTotalPodcastTime(int duration) {
+        podcastProgress.setMax(duration);
+    }
+
+    public void setPodcastProgress(int podcastProgress) {
+        this.podcastProgress.setProgress(podcastProgress);
     }
 }

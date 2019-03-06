@@ -3,6 +3,7 @@ package com.nanodegree.udacity.podcaps.ui.fragment.addPodcast;
 import android.arch.lifecycle.LifecycleOwner;
 import android.media.MediaMetadataRetriever;
 import android.text.Editable;
+import android.widget.Toast;
 
 import com.nanodegree.udacity.podcaps.R;
 import com.nanodegree.udacity.podcaps.data.manager.PodcastManager;
@@ -46,7 +47,7 @@ public class AddPodcastPresenter implements PodcastManager.PodcastManagerListene
             podcast.setDescription(description.toString());
 
         MediaMetadataRetriever metadataRetriever = new MediaMetadataRetriever();
-        metadataRetriever.setDataSource(fragment.getContext(),fragment.selectedAudioPath);
+        metadataRetriever.setDataSource(fragment.getContext(), fragment.selectedAudioPath);
         String duration = metadataRetriever.extractMetadata(MediaMetadataRetriever.METADATA_KEY_DURATION);
         podcast.setDuration(duration);
 
@@ -69,7 +70,10 @@ public class AddPodcastPresenter implements PodcastManager.PodcastManagerListene
 
     @Override
     public void uploadPodcastProgress(int progress) {
-
+        if (progress == 1) {
+            Toast.makeText(fragment.getContext(), "Enviando podcast", Toast.LENGTH_LONG).show();
+            fragment.getFragmentManager().popBackStack();
+        }
     }
 
     @Override

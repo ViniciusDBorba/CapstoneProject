@@ -62,7 +62,7 @@
                 </FrameLayout>
 
                 <SeekBar
-                    android:id="@+id/podcast_control_progress"
+                    android:id="@+id/podcast_progress"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="30dp"
@@ -73,7 +73,7 @@
                     app:layout_constraintBottom_toTopOf="@+id/podcast_control_pause"
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintRight_toRightOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/podcast_image_container" />
+                    app:layout_constraintTop_toBottomOf="@+id/podcast_image_container"/>
 
                 <ImageView
                     android:id="@+id/podcast_control_next"

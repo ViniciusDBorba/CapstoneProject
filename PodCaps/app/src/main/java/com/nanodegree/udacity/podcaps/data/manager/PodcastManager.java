@@ -177,7 +177,12 @@ public class PodcastManager {
     }
 
     public void favoritePodcast(PodcastEntity podcast, String email) {
-        podcast.addFavoritedBy(email);
+        if (podcast.getFavoritedBy().contains(email)) {
+            podcast.removeFavoritedBy(email);
+        } else {
+            podcast.addFavoritedBy(email);
+        }
+
         firebaseService.savePodcast(podcast);
     }
 

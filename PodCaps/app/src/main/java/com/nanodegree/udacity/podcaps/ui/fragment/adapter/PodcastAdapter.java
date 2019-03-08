@@ -59,6 +59,10 @@ public class PodcastAdapter extends RecyclerView.Adapter<PodcastItemViewHolder> 
         return listener.getLoggedUserEmail();
     }
 
+    public void removePodcast(PodcastEntity podcast) {
+        podcasts.remove(podcast);
+    }
+
     public interface PodcastListListener {
 
         void onClickPodcast(PodcastEntity podcast);

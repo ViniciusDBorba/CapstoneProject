@@ -148,4 +148,8 @@ public class PodcastEntity {
     public void addFavoritedBy(String email) {
         favoritedBy.add(email);
     }
+
+    public void removeFavoritedBy(String email) {
+        favoritedBy.remove(email);
+    }
 }

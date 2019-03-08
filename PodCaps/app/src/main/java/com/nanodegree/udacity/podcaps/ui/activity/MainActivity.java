@@ -1,20 +1,17 @@
 package com.nanodegree.udacity.podcaps.ui.activity;
 
 import android.arch.lifecycle.LifecycleOwner;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.constraint.ConstraintLayout;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.BottomNavigationView;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.ProgressBar;
-import android.widget.SeekBar;
 import android.widget.TextView;
 
 import com.nanodegree.udacity.podcaps.R;
-import com.nanodegree.udacity.podcaps.ui.fragment.FavoritesPodcastList;
+import com.nanodegree.udacity.podcaps.ui.fragment.podcastFavoriteList.FavoritesPodcastList;
 import com.nanodegree.udacity.podcaps.ui.fragment.channel.ChannelFragment;
 import com.nanodegree.udacity.podcaps.ui.fragment.podcastList.PodcastListFragment;
 

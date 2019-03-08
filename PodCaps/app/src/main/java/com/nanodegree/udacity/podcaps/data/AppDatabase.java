@@ -3,14 +3,17 @@ package com.nanodegree.udacity.podcaps.data;
 import android.arch.persistence.room.Database;
 import android.arch.persistence.room.Room;
 import android.arch.persistence.room.RoomDatabase;
+import android.arch.persistence.room.TypeConverters;
 import android.content.Context;
 
+import com.nanodegree.udacity.podcaps.data.Converters.StringListConverter;
 import com.nanodegree.udacity.podcaps.data.daos.PodcastDao;
 import com.nanodegree.udacity.podcaps.data.daos.UserDao;
 import com.nanodegree.udacity.podcaps.data.models.PodcastEntity;
 import com.nanodegree.udacity.podcaps.data.models.UserEntity;
 
 @Database(entities = {UserEntity.class, PodcastEntity.class}, version = 1, exportSchema = false)
+@TypeConverters({StringListConverter.class})
 public abstract class AppDatabase extends RoomDatabase {
 
     public static AppDatabase instance;

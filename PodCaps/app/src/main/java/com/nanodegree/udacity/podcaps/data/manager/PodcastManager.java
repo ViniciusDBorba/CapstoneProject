@@ -54,6 +54,31 @@ public class PodcastManager {
                 });
     }
 
+    public void getFavoritesPodcastsByEmail(String email) {
+        firebaseService.getFavoritesPodcastsByEmail(email)
+                .addOnCompleteListener(task -> {
+                    if (task.getResult() == null || task.getResult().isEmpty()) {
+                        listener.podcasts(null);
+                        return;
+                    }
+
+                    List<DocumentSnapshot> docs = task.getResult().getDocuments();
+
+                    if (!docs.isEmpty()) {
+                        List<PodcastEntity> podcasts = new ArrayList<>();
+                        for (DocumentSnapshot doc : docs) {
+                            if (doc.exists()) {
+                                PodcastEntity podcastEntity = doc.getData() == null || doc.getData().isEmpty() ? null : new PodcastEntity(doc);
+                                podcasts.add(podcastEntity);
+                            }
+                        }
+                        listener.podcasts(podcasts);
+                        return;
+                    }
+                    listener.podcasts(null);
+                });
+    }
+
     public void getPodcasts() {
         firebaseService.getPodcasts()
                 .addOnCompleteListener(task -> {
@@ -149,6 +174,11 @@ public class PodcastManager {
             }});
         });
 
+    }
+
+    public void favoritePodcast(PodcastEntity podcast, String email) {
+        podcast.addFavoritedBy(email);
+        firebaseService.savePodcast(podcast);
     }
 
     public interface PodcastManagerListener {

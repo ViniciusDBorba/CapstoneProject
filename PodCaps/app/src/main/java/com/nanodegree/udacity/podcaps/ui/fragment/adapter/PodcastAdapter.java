@@ -54,10 +54,17 @@ public class PodcastAdapter extends RecyclerView.Adapter<PodcastItemViewHolder> 
         listener.onClickFavorite(podcast);
     }
 
+    @Override
+    public String getLoggedUserEmail() {
+        return listener.getLoggedUserEmail();
+    }
+
     public interface PodcastListListener {
 
         void onClickPodcast(PodcastEntity podcast);
 
         void onClickFavorite(PodcastEntity podcast);
+
+        String getLoggedUserEmail();
     }
 }

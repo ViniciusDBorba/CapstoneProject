@@ -3,7 +3,9 @@ package com.nanodegree.udacity.podcaps.ui.fragment.podcastList;
 import android.arch.lifecycle.LifecycleOwner;
 
 import com.nanodegree.udacity.podcaps.data.manager.PodcastManager;
+import com.nanodegree.udacity.podcaps.data.manager.UserManager;
 import com.nanodegree.udacity.podcaps.data.models.PodcastEntity;
+import com.nanodegree.udacity.podcaps.data.models.UserEntity;
 import com.nanodegree.udacity.podcaps.ui.fragment.adapter.PodcastAdapter;
 
 import java.util.List;
@@ -13,10 +15,12 @@ public class PodcastListPresenter implements PodcastManager.PodcastManagerListen
     private final PodcastListFragment fragment;
     private PodcastAdapter adapter;
     private PodcastManager manager;
+    private UserManager userManager;
 
     public PodcastListPresenter(PodcastListFragment fragment) {
         this.fragment = fragment;
         this.manager = new PodcastManager(this, fragment.getContext());
+        this.userManager = new UserManager(fragment.getContext());
     }
 
     public PodcastAdapter getPodcastAdapter() {
@@ -48,7 +52,13 @@ public class PodcastListPresenter implements PodcastManager.PodcastManagerListen
 
     @Override
     public void onClickFavorite(PodcastEntity podcast) {
-        // TODO: 06/03/2019 - implement favorites logic
+        manager.favoritePodcast(podcast, userManager.getLoggedUser().getEmail());
+        this.adapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public String getLoggedUserEmail() {
+        return userManager.getLoggedUser().getEmail();
     }
 
     @Override

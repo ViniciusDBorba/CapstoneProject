@@ -33,27 +33,30 @@ public class UserManager {
 
     }
 
+    public UserManager(Context context) {
+        this.firebaseService = new UserFirebaseService();
+        this.userDao = AppDatabase.getInstance(context).userDao();
+        listener = null;
+    }
+
     public void getUserByEmail(String text) {
-        firebaseService.getUserByEmail(text).addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                if (task.getResult() == null || task.getResult().isEmpty()) {
-                    listener.user(null);
+        firebaseService.getUserByEmail(text).addOnCompleteListener(task -> {
+            if (task.getResult() == null || task.getResult().isEmpty()) {
+                listener.user(null);
+                return;
+            }
+
+            List<DocumentSnapshot> docs = task.getResult().getDocuments();
+
+            if (!docs.isEmpty()) {
+                DocumentSnapshot doc = docs.get(0);
+                if (doc.exists()) {
+                    UserEntity user = doc.getData() == null || doc.getData().isEmpty() ? null : new UserEntity(doc);
+                    listener.user(user);
                     return;
                 }
-
-                List<DocumentSnapshot> docs = task.getResult().getDocuments();
-
-                if (!docs.isEmpty()) {
-                    DocumentSnapshot doc = docs.get(0);
-                    if (doc.exists()) {
-                        UserEntity user = doc.getData() == null || doc.getData().isEmpty() ? null : new UserEntity(doc);
-                        listener.user(user);
-                        return;
-                    }
-                }
-                listener.user(null);
             }
+            listener.user(null);
         });
     }
 
@@ -70,12 +73,9 @@ public class UserManager {
     public void saveUser(final UserEntity user) {
         userDao.insert(user);
         Task<Void> task = firebaseService.saveUser(user);
-        task.addOnCompleteListener(new OnCompleteListener<Void>() {
-            @Override
-            public void onComplete(@NonNull Task<Void> task) {
-                if (task.isSuccessful()) {
-                    listener.userSaved(user);
-                }
+        task.addOnCompleteListener(task1 -> {
+            if (task1.isSuccessful()) {
+                listener.userSaved(user);
             }
         });
 
@@ -86,32 +86,15 @@ public class UserManager {
         final String path = context.getResources().getString(R.string.channel_image_storage_path, user.getEmail(), UUID.randomUUID().toString());
         final UploadTask uploadTask = firebaseService.uploadChannelImage(imageUri, path);
         uploadTask
-                .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                    @Override
-                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                        firebaseService.getStorageRef(path).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-                            @Override
-                            public void onSuccess(Uri uri) {
-                                user.setChannelImage(uri.toString());
-                                saveUser(user);
-                            }
-                        });
-                    }
-                })
-                .addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
-                    @Override
-                    public void onProgress(UploadTask.TaskSnapshot taskSnapshot) {
-                        double progress = (100.0 * taskSnapshot.getBytesTransferred() / taskSnapshot
-                                .getTotalByteCount());
-                        listener.channelImageUploadProgress(progress);
-                    }
+                .addOnSuccessListener(taskSnapshot -> firebaseService.getStorageRef(path).getDownloadUrl().addOnSuccessListener(uri -> {
+                    user.setChannelImage(uri.toString());
+                    saveUser(user);
+                }))
+                .addOnProgressListener(taskSnapshot -> {
+                    double progress = (100.0 * taskSnapshot.getBytesTransferred() / taskSnapshot
+                            .getTotalByteCount());
+                    listener.channelImageUploadProgress(progress);
                 });
-//                .addOnFailureListener(new OnFailureListener() {
-//                    @Override
-//                    public void onFailure(@NonNull Exception e) {
-//
-//                    }
-//                })
 
     }
 

@@ -40,6 +40,15 @@ public class PodcastItemViewHolder extends BaseViewHolder<PodcastEntity> {
         this.podcast = podcastEntity;
         podcastTitle.setText(podcastEntity.getName());
         podcastDescription.setText(podcastEntity.getDescription());
+        setPodcastFavoriteImage();
+    }
+
+    private void setPodcastFavoriteImage() {
+        if (podcast.getFavoritedBy().contains(listener.getLoggedUserEmail())) {
+            podcastFavoriteButton.setImageDrawable(itemView.getResources().getDrawable(R.drawable.ic_star_filled));
+        } else {
+            podcastFavoriteButton.setImageDrawable(itemView.getResources().getDrawable(R.drawable.ic_star_empty));
+        }
     }
 
     @OnClick(R.id.podcast_wrapper)
@@ -56,5 +65,7 @@ public class PodcastItemViewHolder extends BaseViewHolder<PodcastEntity> {
         void onClickPodcast(PodcastEntity podcast);
 
         void onClickFavorite(PodcastEntity podcast);
+
+        String getLoggedUserEmail();
     }
 }

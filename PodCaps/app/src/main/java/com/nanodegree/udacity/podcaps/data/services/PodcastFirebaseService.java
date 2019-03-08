@@ -31,6 +31,10 @@ public class PodcastFirebaseService extends BaseFirebaseService {
         return collection.document(String.valueOf(podcastEntity.getId())).set(podcastEntity);
     }
 
+    public Task<QuerySnapshot> getFavoritesPodcastsByEmail(String email) {
+        return collection.whereArrayContains("favoritedBy", email).get();
+    }
+
     public Task<QuerySnapshot> getPodcastsByEmail(String email) {
         return collection.whereEqualTo("userEmail", email).get();
     }
@@ -41,4 +45,5 @@ public class PodcastFirebaseService extends BaseFirebaseService {
     public void removePodcast(PodcastEntity podcastEntity) {
         collection.document(String.valueOf(podcastEntity.getId())).delete();
     }
+
 }

@@ -5,13 +5,17 @@ import android.content.Intent;
 import android.media.MediaMetadataRetriever;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
@@ -59,6 +63,14 @@ public class AddPodcastFragment extends Fragment implements LifecycleOwner {
         View v = inflater.inflate(R.layout.fragment_add_podcast, container, false);
         ButterKnife.bind(this, v);
         return v;
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+//        getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
+        podcastFile.setKeyListener(null);
+        podcastFile.setTag(new TextView(getContext()).getTag());
     }
 
     public void setEmptyError() {

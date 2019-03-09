@@ -6,6 +6,7 @@ import android.support.constraint.ConstraintLayout;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.BottomNavigationView;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -81,9 +82,9 @@ public class MainActivity extends BaseActivity implements LifecycleOwner {
         presenter = new MainPresenter(this);
         presenter.configPlayer();
         podcastProgress.setClickable(false);
+        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
 
         switchFragment(new PodcastListFragment(), true);
-
     }
 
     @Override

@@ -1,3 +1,3 @@
 # CapstoneProject
 
- - Add google-services json from firebase on CapstoneProject/app folder
+ - Download google-services json with sended link and add on CapstoneProject/app folder
